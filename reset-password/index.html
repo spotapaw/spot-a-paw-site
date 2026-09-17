@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Spot a Paw — reset password</title>
+<meta name="robots" content="noindex">
+<script>
+// Supabase puts the recovery token in the URL fragment. Older app builds
+// send reset links to this domain; the app itself lives at spot-a-paw.com/app/ (and app.spot-a-paw.com, which Vodafone Egypt cannot reach).
+// Forward everything, fragment included (a meta refresh would drop it).
+location.replace('https://spot-a-paw.com/app/reset-password' + location.search + location.hash);
+</script>
+<style>body{font-family:system-ui,sans-serif;background:#043431;color:#F2EBDD;display:grid;place-items:center;height:100vh;margin:0}a{color:#FF7900}</style>
+</head><body><p>Opening the app… <a href="https://spot-a-paw.com/app/reset-password">Continue</a></p></body></html>

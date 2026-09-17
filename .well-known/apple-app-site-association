@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["RYNL69V8LQ.com.onetailonemeal.spotapaw"],
+        "components": [
+          {
+            "/": "/r/*",
+            "comment": "A shared paw opens straight in the app."
+          },
+          {
+            "/": "/reportDetails*",
+            "comment": "Older share links."
+          }
+        ]
+      }
+    ]
+  }
+}

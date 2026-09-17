@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A paw needs help — Spot a Paw</title>
+<meta name="description" content="Someone spotted a stray animal that needs help. Open it in Spot a Paw — the rescue map for stray animals.">
+<link rel="icon" href="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=6c07fc6d">
+<meta property="og:title" content="A paw needs help near you">
+<meta property="og:description" content="Someone spotted a stray animal that needs help. Open it in Spot a Paw.">
+<meta property="og:image" content="https://spot-a-paw.com/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Spot a Paw">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://spot-a-paw.com/assets/og.png">
+<style>
+  body{background:var(--ivory)}
+  .rwrap{width:min(560px,92vw);margin:0 auto;padding:2.2rem 0 3rem}
+  .rcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 60px rgba(4,52,49,.10)}
+  .rmedia{position:relative;aspect-ratio:4/3;background:var(--nile);display:none}
+  .rmedia.on{display:block}
+  .rhero{background:var(--nile);color:var(--ivory);padding:1.5rem 1.3rem;display:flex;align-items:center;gap:.9rem}
+  .rhero img{width:52px;height:52px}
+  .rhero b{font-family:var(--display);font-size:1.15rem;display:block}
+  .rhero span{font-size:.9rem;opacity:.85}
+  .rmedia img{width:100%;height:100%;object-fit:cover;display:block}
+  .rpill{position:absolute;top:14px;left:14px;background:var(--orange);color:#fff;font-weight:700;font-size:.82rem;padding:.36rem .8rem;border-radius:999px}
+  .rbody{padding:1.3rem 1.3rem 1.5rem}
+  .rbody h1{font-size:1.5rem;margin:.1rem 0 .5rem;line-height:1.25}
+  .rmeta{color:var(--muted);font-size:.92rem;margin:0 0 1rem}
+  .rdesc{margin:0 0 1.3rem}
+  .ract{display:flex;flex-direction:column;gap:.6rem}
+  .ract .btn{width:100%;justify-content:center}
+  .rfoot{text-align:center;color:var(--muted);font-size:.86rem;margin-top:1.4rem}
+  .rfoot a{color:var(--nile);font-weight:600}
+  .rbrand{display:flex;align-items:center;gap:.6rem;justify-content:center;margin-bottom:1.4rem;text-decoration:none}
+  .rbrand img{width:38px;height:38px}
+  .rbrand b{font-family:var(--display);color:var(--nile);font-size:1.15rem}
+  .skel{color:var(--muted);text-align:center;padding:2rem 0}
+</style>
+</head>
+<body>
+<div class="rwrap">
+  <a class="rbrand" href="/">
+    <img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/eg/paw_default_o1.png" alt="">
+    <b>Spot a Paw</b>
+  </a>
+
+  <div class="rcard">
+    <div class="rmedia" id="media"></div>
+    <div class="rhero" id="hero">
+      <img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/eg/hover_needs_o.png" alt="">
+      <div><b>Needs help</b><span>Spotted on the rescue map</span></div>
+    </div>
+    <div class="rbody">
+      <h1 id="headline">A paw needs your help</h1>
+      <p class="rmeta" id="meta">Someone nearby spotted a stray animal. Open it in Spot a Paw to see where it is and lend a hand.</p>
+      <p class="rdesc" id="desc"></p>
+      <div class="ract">
+        <a class="btn btn-orange" id="open" href="#">Open in Spot a Paw</a>
+        <a class="btn btn-nile" href="/#get">Get the app — free</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="rfoot">Spot a Paw is the rescue map for stray animals — the technology arm of
+    <a href="/">One Tail One Meal</a>. Free, forever.</p>
+</div>
+
+<script>
+(function () {
+  var SB = 'https://qyyydmjrrtyauyawheos.supabase.co';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5eXlkbWpycnR5YXV5YXdoZW9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0ODU5MjMsImV4cCI6MjEwMTA2MTkyM30.O93FlNx3Sd0QGutNLUEcGH-aUMa4KNcn_V-rzVZc9-o';
+  var id = new URLSearchParams(location.search).get('id') || '';
+  // the app registers scheme spotapaw + host onetailonemeal.com (Flutter deep linking)
+  var deep = 'spotapaw://onetailonemeal.com/' + (id ? 'reportDetails?reportId=' + encodeURIComponent(id) : '');
+  document.getElementById('open').href = deep;
+
+  // public_reports: a narrow, anon-readable view of reports. It carries the
+  // title, the photo and the state -- and deliberately NOT lat, lng or who
+  // reported it, so a forwarded link never tells a stranger where an animal
+  // sleeps. Querying `reports` directly (as this page used to) always came
+  // back empty for a logged-out visitor, which is why every share showed the
+  // generic card.
+  var VIEW = '/rest/v1/public_reports';
+
+  // Most of these links are forwarded through WhatsApp in Cairo, so the
+  // person opening one is more likely reading Arabic than English.
+  var ar = /^ar\b/i.test(navigator.language || '');
+
+  var needText = {
+    food: ['needs food', 'يحتاج طعامًا'], water: ['needs water', 'يحتاج ماءً'],
+    medical: ['needs medical help', 'يحتاج علاجًا'], rescue: ['needs rescue', 'يحتاج إنقاذًا'],
+    shelter: ['needs shelter', 'يحتاج مأوى'],
+    mother_puppies: ['is a mum with pups', 'أم مع صغارها']
+  };
+  var kindText = {
+    cat: ['This cat', 'هذه القطة'], dog: ['This dog', 'هذا الكلب'],
+    other: ['This animal', 'هذا الحيوان']
+  };
+  var statusText = {
+    reported: ['Needs help', 'يحتاج مساعدة'], confirmed: ['Needs help', 'يحتاج مساعدة'],
+    in_progress: ['Help underway', 'المساعدة جارية'], resolved: ['Rescued', 'تم إنقاذه'],
+    adopted: ['Adopted', 'تم تبنّيه'], cancelled: ['Closed', 'مغلق']
+  };
+  // Rescued and adopted are good news; the pill should not shout orange.
+  var statusTone = { resolved: '#2E7D32', adopted: '#2E7D32', in_progress: '#C99536' };
+
+  // NB: not `t` -- a `var t` further down this same scope would clobber it.
+  function pick(pair, fallback) { return (pair || fallback)[ar ? 1 : 0]; }
+
+  if (ar) {
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+    document.getElementById('open').textContent = 'افتح في Spot a Paw';
+    document.querySelector('.ract .btn-nile').textContent = 'حمّل التطبيق — مجانًا';
+    document.getElementById('headline').textContent = 'كف يحتاج مساعدتك';
+    document.getElementById('meta').textContent =
+      'حد قريب رصد حيوان شارع محتاج مساعدة. افتحه في التطبيق عشان تشوف مكانه وتساعد.';
+    document.querySelector('.rhero b').textContent = 'يحتاج مساعدة';
+    document.querySelector('.rhero span').textContent = 'مرصود على خريطة الإنقاذ';
+    document.querySelector('.rfoot').innerHTML =
+      'Spot a Paw هي خريطة إنقاذ حيوانات الشارع — الذراع التقني لـ ' +
+      '<a href="/">One Tail One Meal</a>. مجاني، للأبد.';
+  }
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  if (!id) return;
+
+  fetch(SB + VIEW + '?select=title,description,media_url,image_url,media_type,poster_url,paw_type,category,status,created_at&id=eq.' + encodeURIComponent(id),
+        { headers: { apikey: KEY } })
+    .then(function (r) { return r.json(); })
+    .then(function (rows) {
+      var r = rows && rows[0];
+      if (!r) return;                       // stays on the generic card
+      var photo = (r.media_type === 'video' ? (r.poster_url || r.image_url) : (r.media_url || r.image_url)) || '';
+      var need = pick(needText[r.category], ['needs help', 'يحتاج مساعدة']);
+      var kind = pick(kindText[r.paw_type], kindText.other);
+      var line = kind + ' ' + need;
+      document.getElementById('headline').textContent =
+        (r.title && r.title.trim()) ? r.title : line;
+      document.getElementById('meta').textContent =
+        ar ? (line + ' · مرصود على Spot a Paw') : (line + ' · reported on Spot a Paw');
+      document.getElementById('desc').textContent = r.description || '';
+      var m = document.getElementById('media');
+      var pill = pick(statusText[r.status], statusText.reported);
+      var tone = statusTone[r.status];
+      if (photo) {
+        m.innerHTML = '<img alt="" src="' + esc(photo) + '"><span class="rpill"' +
+          (tone ? ' style="background:' + tone + '"' : '') + '>' + esc(pill) + '</span>';
+        m.classList.add('on');
+        document.getElementById('hero').style.display = 'none';
+      } else {
+        document.querySelector('.rhero b').textContent = pill;
+      }
+      document.title = document.getElementById('headline').textContent + ' — Spot a Paw';
+    })
+    .catch(function (e) {                   // the generic card is the fallback
+      if (window.console) console.warn('share card:', e);
+    });
+
+  // If the app is installed the custom scheme takes over; otherwise the
+  // visitor simply stays on this page, which is the right fallback.
+})();
+</script>
+</body>
+</html>

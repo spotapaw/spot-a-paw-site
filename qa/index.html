@@ -1,0 +1,1704 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spot a Paw — Test Plan</title>
+<meta name="description" content="Everything to test in Spot a Paw, in the order a real person would meet it.">
+<link rel="icon" href="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nile:#1F5148; --deep:#043431; --ivory:#F2EBDD; --paper:#FBF8F1;
+  --orange:#FF7900; --ink:#16211E; --muted:#5B6B66; --line:#E2DACA;
+  --ok:#1B7F5A; --warn:#B4690E; --bad:#B3261E;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0 0 .35em}
+h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}
+h2{font-size:clamp(1.3rem,2.4vw,1.75rem);font-weight:800;margin-top:0}
+h3{font-size:1.02rem;font-weight:700;margin:1.6rem 0 .5rem}
+p{margin:0 0 .9em}
+a{color:var(--nile)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:#EFE9DA;padding:.1em .35em;border-radius:4px}
+.wrap{width:min(1080px,94vw);margin:0 auto}
+
+/* header */
+header{background:var(--deep);color:var(--ivory);padding:2.2rem 0 1.6rem}
+header h1{color:var(--ivory)}
+header p{color:rgba(242,235,221,.8);max-width:62ch;margin-bottom:0}
+.kicker{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;color:var(--orange);margin-bottom:.6rem}
+.kicker::before{content:"";width:20px;height:2px;background:var(--orange)}
+
+/* sticky control bar */
+.bar{position:sticky;top:0;z-index:20;background:rgba(251,248,241,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;padding:.7rem 0}
+.prog{flex:1;min-width:180px;display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:600;color:var(--muted)}
+.prog .track{flex:1;height:8px;border-radius:99px;background:#E7E0D0;overflow:hidden}
+.prog .track i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.bar button{font-family:var(--body);font-weight:600;font-size:.82rem;padding:.45rem .8rem;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.bar button:hover{border-color:var(--nile)}
+.bar button.on{background:var(--nile);color:var(--ivory);border-color:var(--nile)}
+
+/* layout */
+main{padding:2rem 0 5rem}
+.intro{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1.6rem}
+.intro h2{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.note{border-left:4px solid var(--orange);background:#FFF3E6;border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:1rem 0}
+.note.stop{border-color:var(--bad);background:#FDECEA}
+.note p:last-child{margin-bottom:0}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:.6rem 0 1.2rem}
+th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+/* sections */
+section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1.2rem}
+.sec-head{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin-bottom:.3rem}
+.sec-head .count{font-size:.78rem;font-weight:700;color:var(--muted);margin-left:auto}
+.sec-lede{color:var(--muted);max-width:70ch}
+
+/* a case */
+.case{border-top:1px solid var(--line);padding:.9rem 0 .8rem;display:grid;grid-template-columns:auto 1fr;gap:.9rem}
+.case:first-of-type{border-top:0}
+.case.done{opacity:.62}
+.case.flagged{opacity:1}
+.case input[type=checkbox]{width:22px;height:22px;accent-color:var(--ok);margin-top:.15rem;cursor:pointer}
+.case .id{font-family:ui-monospace,monospace;font-size:.74rem;color:var(--muted);letter-spacing:.04em}
+.case h4{font-family:var(--body);font-size:1rem;font-weight:700;margin:.1rem 0 .35rem}
+.case ol{margin:.3rem 0 .5rem;padding-left:1.15rem}
+.case li{margin:.15rem 0}
+.exp{background:#F4F7F5;border-radius:10px;padding:.55rem .75rem;font-size:.92rem}
+.exp b{color:var(--nile)}
+.tags{display:flex;gap:.4rem;flex-wrap:wrap;margin:.45rem 0 0}
+.tag{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.tag.p0{background:#FDECEA;color:var(--bad);border-color:#F3C6C2}
+.tag.p1{background:#FFF3E6;color:var(--warn);border-color:#F0D8B8}
+.tag.ar{background:#EAF3EF;color:var(--ok);border-color:#C7E0D5}
+.flag{margin-top:.5rem;display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;user-select:none}
+.flag input{width:16px;height:16px;accent-color:var(--bad);cursor:pointer}
+.case.flagged{background:#FFF8F7;border-radius:10px;padding-left:.6rem;padding-right:.6rem;margin:0 -.6rem}
+textarea{width:100%;margin-top:.5rem;font-family:var(--body);font-size:.9rem;padding:.5rem .6rem;border:1px solid var(--line);border-radius:8px;resize:vertical;min-height:52px;background:#FFFDF8}
+.hide{display:none!important}
+
+footer{color:var(--muted);font-size:.86rem;padding:2rem 0 3rem}
+@media print{
+  .bar,.flag,textarea{display:none}
+  section,.intro{break-inside:avoid;box-shadow:none}
+  body{background:#fff}
+  .case.done{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Spot a Paw · 1.0.1 build 15</p>
+    <h1>Test plan</h1>
+    <p>Everything in the app, in the order a real person meets it. Work top to bottom.
+      Tick each case as you finish it; tick <b>Problem</b> and write what happened if it
+      didn't do what the box says it should. Your ticks are saved in this browser, so you
+      can stop and come back.</p>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="prog"><span id="pct">0%</span><span class="track"><i id="fill"></i></span><span id="cnt">0 / 0</span></div>
+    <button id="fOpen">Only unfinished</button>
+    <button id="fFlag">Only problems</button>
+    <button id="fP0">Only must-pass</button>
+    <button id="doPrint">Print</button>
+    <button id="doReset">Reset</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+<div class="intro">
+  <h2>Before you start</h2>
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:0">What you need</h3>
+      <ul>
+        <li>An <b>iPhone</b> with the TestFlight build installed. (Android isn't released yet.)</li>
+        <li>A working <b>email address</b> you can open on the phone — you'll need to click a verification link.</li>
+        <li>To be <b>outdoors or able to fake a location</b> for a few cases. Cairo is ideal; anywhere works.</li>
+        <li>About <b>90 minutes</b> for a full pass. Sections 1–6 are the critical hour.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:0">How to report</h3>
+      <p>For anything that fails, tick <b>Problem</b> and in the box write:</p>
+      <ol>
+        <li>What you did, step by step</li>
+        <li>What you expected</li>
+        <li>What actually happened</li>
+        <li>A screenshot or screen recording — this is the single most useful thing</li>
+      </ol>
+      <p style="margin-bottom:0">Then use <b>Print</b> at the end to save the whole sheet as a PDF and send it back.</p>
+    </div>
+  </div>
+
+  <div class="note stop">
+    <p><b>Known already — please don't report these.</b> They'll waste your time and mine:</p>
+    <ul style="margin:.4rem 0 0">
+      <li><b>Android push doesn't work.</b> Being fixed separately. iOS push should work.</li>
+      <li><b>Shared paw links open the website, not the app.</b> That's expected for now — the
+        page itself should work and look right, and that <i>is</i> worth testing.</li>
+      <li><b>There is no Facebook sign-in.</b> It was removed deliberately.</li>
+      <li><b>Some paws around Cairo are demo data</b> seeded for testing. They're real database
+        rows, so they behave like real reports. Don't be alarmed by them, and don't judge
+        "is the map busy?" by them.</li>
+      <li><b>The app is nearly empty of real users.</b> Empty lists are usually correct, not broken.
+        What matters is whether the empty state <i>says something sensible</i>.</li>
+    </ul>
+  </div>
+
+  <h3>What the tags mean</h3>
+  <table>
+    <tr><th style="width:9rem">Tag</th><th>Meaning</th></tr>
+    <tr><td><span class="tag p0">Must pass</span></td><td>If this fails, the release stops. Test these first if you're short of time.</td></tr>
+    <tr><td><span class="tag p1">Important</span></td><td>Should be fixed before launch, but wouldn't stop it alone.</td></tr>
+    <tr><td><span class="tag ar">Arabic</span></td><td>Do this case a second time with the app in Arabic. Section 15 explains how.</td></tr>
+  </table>
+</div>
+
+<!-- ============================================================= -->
+<section data-sec="1">
+  <div class="sec-head"><h2>1. First run and onboarding</h2><span class="count"></span></div>
+  <p class="sec-lede">The first sixty seconds. Delete and reinstall the app before this section
+    so you genuinely see a first run.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">1.1</div>
+      <h4>The app opens and shows onboarding</h4>
+      <ol><li>Delete the app if it's installed, reinstall from TestFlight, open it.</li></ol>
+      <div class="exp"><b>Expect:</b> a splash, then an onboarding screen with the One Tail One Meal
+        artwork, a language choice (English / العربية), five bullet points about what the app does,
+        and a <b>Start Rescuing</b> button. No error, no blank screen, nothing cut off at the edges.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">1.2</div>
+      <h4>The language toggle actually switches the app</h4>
+      <ol><li>On onboarding, tap <b>العربية</b>.</li></ol>
+      <div class="exp"><b>Expect:</b> the whole screen flips to Arabic and to right-to-left
+        immediately — text right-aligned, the layout mirrored. Tap English and it flips back.
+        Nothing should stay in the wrong language.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">1.3</div>
+      <h4>Onboarding doesn't come back</h4>
+      <ol><li>Tap Start Rescuing, then close the app fully and reopen it.</li></ol>
+      <div class="exp"><b>Expect:</b> you land on the sign-in screen, not onboarding again.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">1.4</div>
+      <h4>Six ways to help</h4>
+      <ol>
+          <li>Read the list of ways to help on the onboarding screen.</li>
+          <li>Do it again in Arabic.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> there are <b>six</b>, ending with <b>Share the Offcuts</b> — the butcher one. In Arabic it reads <b>شارك القصاقيص</b>, not the driver text above it.</div>
+      <div class="tags"><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="2">
+  <div class="sec-head"><h2>2. Creating an account</h2><span class="count"></span></div>
+  <p class="sec-lede">Use a real email address you can open on the phone. Use a fresh one — not
+    an address that already has an account.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">2.1</div>
+      <h4>Sign up tells you to check your email</h4>
+      <ol>
+        <li>On the sign-in screen, enter a new email and a password.</li>
+        <li>Pick a role from the row of icons (Rescuer, Feeder, Vet, Shelter, Driver).</li>
+        <li>Tap <b>Create Account</b>.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> within a couple of seconds a dialog appears saying
+        <b>Check your email</b>, naming the address you typed, and telling you to open the link and
+        come back. It must not close on its own, and you must not be left staring at a spinner or a
+        silent screen.</div>
+      <div class="tags"><span class="tag p0">Must pass</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">2.2</div>
+      <h4>The verification email arrives and works</h4>
+      <ol><li>Open your inbox on the phone and tap the link in the Spot a Paw email.</li>
+          <li>Come back to the app and sign in with the same email and password.</li></ol>
+      <div class="exp"><b>Expect:</b> the email arrives within a minute (check spam), the link
+        confirms without an error page, and you can then sign in. Note how long the email took.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="How long did the email take? Any error page?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">2.3</div>
+      <h4>Signing in before verifying says so</h4>
+      <ol><li>Create a second account with a different email but <b>don't</b> click the link.</li>
+          <li>Try to sign in with it.</li></ol>
+      <div class="exp"><b>Expect:</b> a clear message. What it must <i>not</i> do is fail silently,
+        or let you in.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What did it say?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">2.4</div>
+      <h4>Signing up with an address that already exists</h4>
+      <ol><li>Try to create an account using the email from case 2.1 again.</li></ol>
+      <div class="exp"><b>Expect:</b> it tells you the address is already registered and suggests
+        signing in. It must not silently create a duplicate or say nothing.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">2.5</div>
+      <h4>Empty and bad input</h4>
+      <ol><li>Tap Create Account with both fields empty.</li>
+          <li>Try an email with no <code>@</code>.</li>
+          <li>Try a one-character password.</li></ol>
+      <div class="exp"><b>Expect:</b> a helpful message each time. Nothing should crash, and the
+        button should never appear to work and then do nothing.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">2.6</div>
+      <h4>Butcher is a role you can sign up as</h4>
+      <ol>
+          <li>On the sign-up screen, look at the <b>Log on as / Sign up as</b> row.</li>
+          <li>Pick <b>Butcher</b> and create the account.</li>
+          <li>Open your profile.</li>
+          <li>Repeat the whole thing in Arabic.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> there are <b>six</b> roles and the sixth is Butcher, with a butcher-stall mark like the other five — <b>not a blank space and not a rescuer paw</b>. After signing up, the profile shows Butcher. In Arabic the chip reads <b>جزار</b> and the profile says جزار, not منقذ. Also check the Vet chip still reads <b>بيطري</b> in full and is not cut off.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="3">
+  <div class="sec-head"><h2>3. Signing in, and the sign-in buttons</h2><span class="count"></span></div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">3.1</div>
+      <h4>Sign in with Apple</h4>
+      <ol><li>On the sign-in screen tap <b>Sign in with Apple</b> and complete it.</li></ol>
+      <div class="exp"><b>Expect:</b> it signs you in and lands on the map. Also look at the button
+        itself: black, full width, white Apple logo, the words "Sign in with Apple", the same size as
+        the Google button below it.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">3.2</div>
+      <h4>Sign in with Google</h4>
+      <ol><li>Sign out, then tap <b>Sign in with Google</b> and complete it.</li></ol>
+      <div class="exp"><b>Expect:</b> it signs you in. The button should be dark with a thin grey
+        outline and the <b>four-colour</b> Google G — red, yellow, green and blue. If that G is a
+        single flat colour, that's a bug and worth flagging.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">3.3</div>
+      <h4>Wrong password</h4>
+      <ol><li>Sign in with a correct email and a deliberately wrong password.</li></ol>
+      <div class="exp"><b>Expect:</b> a clear "that didn't work" message. Not a silent screen, and
+        not a message that leaks whether the email exists.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">3.4</div>
+      <h4>Forgot password, all the way through</h4>
+      <ol><li>Tap <b>Forgot your password?</b> and enter your email.</li>
+          <li>Open the email and follow the reset link.</li>
+          <li>Set a new password and save.</li>
+          <li>Sign in with the new password.</li></ol>
+      <div class="exp"><b>Expect:</b> exactly <b>one</b> confirmation message, in the language the app
+        is in — not two, and not one English plus one Arabic. Then it signs you out and you can sign
+        in with the new password.</div>
+      <div class="tags"><span class="tag p0">Must pass</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="How many messages? What language?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">3.5</div>
+      <h4>An expired reset link must not claim success</h4>
+      <ol><li>Ask for a password reset, then <b>wait</b> and request a second reset email.</li>
+          <li>Now open the <b>first</b> (older) link and try to set a password.</li></ol>
+      <div class="exp"><b>Expect:</b> it tells you the link has expired and asks you to request a new
+        one. It must <b>not</b> say "Password updated" and sign you out — that's the exact bug this
+        case exists to catch.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What did it say?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">3.6</div>
+      <h4>Staying signed in</h4>
+      <ol><li>Close the app completely (swipe it away) and reopen it.</li>
+          <li>Restart the phone and open it again.</li></ol>
+      <div class="exp"><b>Expect:</b> you're still signed in both times and land on the map.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="4">
+  <div class="sec-head"><h2>4. The map</h2><span class="count"></span></div>
+  <p class="sec-lede">The home screen and the heart of the app.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.1</div>
+      <h4>The map loads and asks for location</h4>
+      <ol><li>Sign in and wait for the map.</li></ol>
+      <div class="exp"><b>Expect:</b> the map draws with streets and labels, iOS asks for location
+        permission, and after you allow it the map moves to where you are. Paw pins appear.
+        No grey rectangle, no "For development purposes only" watermark.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.2</div>
+      <h4>The app asks for notification permission</h4>
+      <ol><li>On this first sign-in, watch for the iOS notifications prompt.</li></ol>
+      <div class="exp"><b>Expect:</b> iOS asks whether Spot a Paw may send notifications, and you
+        allow it. This should happen on <b>every</b> route into the app — sign-up, sign-in, or just
+        reopening — not only when you create an account.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Did it ask? At what moment?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.3</div>
+      <h4>The pins are the right artwork</h4>
+      <ol><li>Look closely at the pins and the icons around the map.</li></ol>
+      <div class="exp"><b>Expect:</b> hand-drawn Egyptian-style paw artwork in orange and cream —
+        not generic grey Material icons, and not blank squares. Turn off wi-fi and mobile data,
+        force-close the app, reopen: the artwork should <b>still</b> be there.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.4</div>
+      <h4>Filters</h4>
+      <ol><li>Use the filter chips along the top: Dog, Cat, Other, Needs Help, Help Underway, Rescued.</li>
+          <li>Turn each on and off.</li></ol>
+      <div class="exp"><b>Expect:</b> the pins on the map change to match. Turning everything off
+        should not leave stale pins behind.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.5</div>
+      <h4>Search a street, and the locate button</h4>
+      <ol><li>Type a street or area into the search box at the bottom and pick a result.</li>
+          <li>Then tap the locate (target) button.</li></ol>
+      <div class="exp"><b>Expect:</b> the map moves to the place you searched, then back to you.
+        Both controls sit on the parchment panel and are fully tappable — neither should be missing
+        or cut off.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.6</div>
+      <h4>Vets and shelters nearby</h4>
+      <ol><li>Tap the <b>Vets Nearby</b> and <b>Shelters Nearby</b> buttons on the left.</li></ol>
+      <div class="exp"><b>Expect:</b> real nearby places appear. Tapping one shows its name, and
+        ideally a way to call or navigate.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">4.7</div>
+      <h4>Tapping a pin</h4>
+      <ol><li>Tap any paw pin on the map.</li></ol>
+      <div class="exp"><b>Expect:</b> it opens that animal's page, with the photo, what's wrong,
+        and its current status.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="5">
+  <div class="sec-head"><h2>5. Reporting an animal — Spot a Paw</h2><span class="count"></span></div>
+  <p class="sec-lede">The single most important thing the app does. Take your time here.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">5.1</div>
+      <h4>Report with a photo from the camera</h4>
+      <ol>
+        <li>Tap <b>Spot a Paw</b> in the bottom bar.</li>
+        <li>Take a photo (of anything — a cushion is fine).</li>
+        <li>Choose dog or cat, pick what's needed (food, water, medical, rescue, mother &amp; pups).</li>
+        <li>Type a description.</li>
+        <li>Check the location on the little map, then submit.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> it saves and you're taken to the animal's page or the feed,
+        and your new paw is on the map where you were. The description box sits on its own
+        parchment panel and the text isn't clipped.</div>
+      <div class="tags"><span class="tag p0">Must pass</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">5.2</div>
+      <h4>Report with a photo from the library, and with a video</h4>
+      <ol><li>Repeat 5.1 but pick an existing photo.</li>
+          <li>Then repeat once more with a short video.</li></ol>
+      <div class="exp"><b>Expect:</b> both upload. The video shows a still thumbnail in the feed
+        rather than a black rectangle, and plays when tapped.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">5.3</div>
+      <h4>Moving the pin by hand</h4>
+      <ol><li>Start a report and drag the map / pin to a spot down the road.</li>
+          <li>Submit and then find it on the main map.</li></ol>
+      <div class="exp"><b>Expect:</b> it lands where you put it, not where you're standing.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">5.4</div>
+      <h4>Submitting with things missing</h4>
+      <ol><li>Try to submit with no photo.</li>
+          <li>Try with no description.</li>
+          <li>Try with location permission denied (Settings → Spot a Paw → Location → Never).</li></ol>
+      <div class="exp"><b>Expect:</b> each one either explains what's missing or handles it sensibly.
+        Nothing should hang, crash, or save a broken report. Turn location back on afterwards.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened for each?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">5.5</div>
+      <h4>A very long description</h4>
+      <ol><li>Paste a long paragraph — 500 words or so — into the description and submit.</li></ol>
+      <div class="exp"><b>Expect:</b> it saves, and the feed card truncates it neatly with an ellipsis
+        rather than overflowing or pushing the layout apart.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="6">
+  <div class="sec-head"><h2>6. Answering a report</h2><span class="count"></span></div>
+  <p class="sec-lede">The half that makes the app worth anything. If you can, do this with a
+    <b>second phone or account</b> so one person reports and another answers.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.1</div>
+      <h4>"I'm on my way"</h4>
+      <ol><li>Open someone else's report and offer help / say you're on the way.</li></ol>
+      <div class="exp"><b>Expect:</b> the report's status changes to help underway, your name appears
+        as helping, and the pin on the map changes colour or icon to match.</div>
+      <div class="tags"><span class="tag p0">Must pass</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.2</div>
+      <h4>The reporter gets a push notification</h4>
+      <ol><li>With two accounts: A reports, B offers help.</li>
+          <li>Put A's phone to sleep and watch for a notification.</li></ol>
+      <div class="exp"><b>Expect:</b> A's phone gets a push saying someone is on the way, and tapping
+        it opens that report. If nothing arrives, note whether A ever allowed notifications.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Did it arrive? How long did it take? Did tapping it open the right report?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.3</div>
+      <h4>Comments</h4>
+      <ol><li>Leave a comment on a report. From the other account, reply.</li></ol>
+      <div class="exp"><b>Expect:</b> both comments appear with the right names, avatars and times,
+        in the right order, and refresh without needing to close the page.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.4</div>
+      <h4>Mark as rescued</h4>
+      <ol><li>On a report you're helping with, mark it rescued.</li></ol>
+      <div class="exp"><b>Expect:</b> the status changes everywhere — the report, the map pin, and
+        the Success Stories tab. The reporter should be notified.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.5</div>
+      <h4>Mark as adopted</h4>
+      <ol><li>On a rescued animal, mark it adopted.</li></ol>
+      <div class="exp"><b>Expect:</b> an ADOPTED badge appears. Also check the reverse:
+        "Mark as adopted" should <b>not</b> be offered on an animal that hasn't been rescued yet.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.6</div>
+      <h4>The rescue timeline</h4>
+      <ol><li>Look at the history on a report that's been through spotted → underway → rescued.</li></ol>
+      <div class="exp"><b>Expect:</b> the steps are in order, with sensible times ("2 hours ago")
+        and the right names. No <code>$variable</code> text or literal placeholders showing.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.7</div>
+      <h4>Editing and withdrawing your own report</h4>
+      <ol><li>Open a report <b>you</b> made and edit the description or photo.</li>
+          <li>Then withdraw / delete it.</li></ol>
+      <div class="exp"><b>Expect:</b> edits save and show. Withdrawn reports leave the main map.
+        And check you <b>cannot</b> edit somebody else's report.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">6.8</div>
+      <h4>Sharing a paw</h4>
+      <ol><li>Share a report to WhatsApp or Notes.</li>
+          <li>Open the shared link on a phone that does <b>not</b> have the app.</li></ol>
+      <div class="exp"><b>Expect:</b> a share card with the photo and a link. The link opens a web
+        page showing that <b>specific animal</b> — not an empty page, not the homepage. If your
+        phone's language is Arabic, the page should be in Arabic.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What did the page show?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="7">
+  <div class="sec-head"><h2>7. Paws &amp; Tails — the feed</h2><span class="count"></span></div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">7.1</div>
+      <h4>All five tabs load</h4>
+      <ol><li>Open <b>Paws &amp; Tails</b> and visit each tab: Spotted Paws, Needs Help,
+        Help Underway, Feeding Spots, Success Stories.</li></ol>
+      <div class="exp"><b>Expect:</b> each tab loads its own content. <b>None of them should be
+        permanently empty</b> while another tab clearly has matching items — that's the classic
+        failure here. If a tab is empty, it should say something helpful rather than show nothing.</div>
+      <div class="tags"><span class="tag p0">Must pass</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Which tabs, and what did each show?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">7.2</div>
+      <h4>Cards look right</h4>
+      <ol><li>Scroll the feed and look at the cards closely.</li></ol>
+      <div class="exp"><b>Expect:</b> photo, title, distance, time ago, status chip and the reporter's
+        name all present and aligned. Long names and titles truncate rather than overflow. No card
+        should show a broken-image icon.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">7.3</div>
+      <h4>Pull to refresh, and scrolling a long list</h4>
+      <ol><li>Pull down to refresh. Then scroll to the bottom.</li></ol>
+      <div class="exp"><b>Expect:</b> refreshing works and doesn't duplicate items. Scrolling stays
+        smooth and doesn't jump back to the top on its own.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">7.4</div>
+      <h4>A new report appears without restarting</h4>
+      <ol><li>With two phones, post a report on one and watch the other's feed.</li></ol>
+      <div class="exp"><b>Expect:</b> it turns up within a few seconds, or after a pull to refresh
+        at worst.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="How long did it take?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="8">
+  <div class="sec-head"><h2>8. Feeding spots and routes</h2><span class="count"></span></div>
+  <p class="sec-lede">The part a regular feeder uses every evening.</p>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.1</div>
+      <h4>Create a feeding spot</h4>
+      <ol><li>From the map or the Feeding Spots tab, add a spot: name it, say what's needed,
+        set the location.</li></ol>
+      <div class="exp"><b>Expect:</b> it saves and appears on the map and in the list.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.2</div>
+      <h4>Fed today / Seen check-ins</h4>
+      <ol><li>On a spot, tap <b>Fed today</b>. Then <b>Seen</b>.</li>
+          <li>Leave the page and come back.</li></ol>
+      <div class="exp"><b>Expect:</b> the check-in sticks, shows who and when, and the card updates.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.3</div>
+      <h4>A sensitive spot hides its exact location</h4>
+      <ol><li>Create a spot and mark it <b>sensitive</b>.</li>
+          <li>Sign in as a <b>different, ordinary</b> account and find that spot.</li></ol>
+      <div class="exp"><b>Expect:</b> the other account sees the name and what's needed, but
+        <b>no exact coordinates and no predictable feeding time</b> — an approximate area at most.
+        This protects colonies from people who harm them, so treat any leak as serious.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Exactly what could the second account see?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.4</div>
+      <h4>Tonight's feeding route</h4>
+      <ol><li>Add two or three spots to a route and start it.</li>
+          <li>Mark the first stop done.</li></ol>
+      <div class="exp"><b>Expect:</b> a route bar pins above the list, stops are in order, and
+        finishing one advances to the next.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.5</div>
+      <h4>Editing someone else's spot</h4>
+      <ol><li>From a second ordinary account, try to rename or delete a spot you didn't create.</li></ol>
+      <div class="exp"><b>Expect:</b> you can't. Either the option isn't offered, or it's refused
+        clearly. It must not silently appear to work.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.6</div>
+      <h4>Take back something you logged by mistake</h4>
+      <ol>
+          <li>On a colony, mark <b>Sterilised</b> (or Microchipped).</li>
+          <li>Open <b>View history</b>.</li>
+          <li>Remove your own entry.</li>
+          <li>From a SECOND account, add an entry, then go back to the first account and open the history again.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> your own entry can be removed and the colony's counts go back down. The other account's entry is visible but has <b>no</b> remove control — you can only take back your own.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.7</div>
+      <h4>Only your own toggles, and they toggle off</h4>
+      <ol>
+          <li>Tap <b>Fed today</b>, <b>Seen them</b>, <b>Sterilised</b>, <b>Microchipped</b> on a colony.</li>
+          <li>Tap each one again.</li>
+          <li>Check the same colony from a second account.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> each tap turns the button on and records it; tapping again turns it off and removes it. The second account sees its own buttons off — these are per-person, not per-colony.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">8.8</div>
+      <h4>How far away colonies are</h4>
+      <ol>
+          <li>Open Feeding Spots and change the distance chip (5, 10, 25, 50, 100 km, and everywhere).</li>
+          <li>Watch the list and the distance shown on each card.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> the list shortens and lengthens as you change it, and each colony shows a believable distance from where you are. <b>Everywhere</b> shows all of them.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="9">
+  <div class="sec-head"><h2>9. Communities</h2><span class="count"></span></div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.1</div>
+      <h4>Create, join and post</h4>
+      <ol><li>Create a community. From a second account, find and join it.</li>
+          <li>Post something from each account.</li></ol>
+      <div class="exp"><b>Expect:</b> the community appears in the list for both, joining sticks,
+        and both posts show with the right names and times.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.2</div>
+      <h4>Editing and leaving</h4>
+      <ol><li>As its creator, edit the community's name or description.</li>
+          <li>From the second account, leave it.</li>
+          <li>From the second account, try to edit it.</li></ol>
+      <div class="exp"><b>Expect:</b> the creator can edit; a member can leave; a non-creator cannot
+        edit.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.3</div>
+      <h4>Empty state</h4>
+      <ol><li>Open Communities on a brand-new account that has joined nothing.</li></ol>
+      <div class="exp"><b>Expect:</b> a sentence explaining what communities are and a way to create
+        or find one — not a blank screen.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What did it say?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.4</div>
+      <h4>The six badges filter the list</h4>
+      <ol>
+          <li>Open Communities and look at the row of badges at the top.</li>
+          <li>Tap one — say Vet — and watch the list.</li>
+          <li>Tap it again.</li>
+          <li>Turn several off, then use <b>Show all</b>.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> all six start <b>on</b> (Rescuer, Feeder, Vet, Shelter, Driver, Butcher), each with its own artwork — no blanks, and no two badges sharing a picture. Tapping one hides that kind and dims the chip; tapping again brings it back. A line tells you how many badges you are showing, and Show all resets it.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.5</div>
+      <h4>Everywhere, or your country</h4>
+      <ol>
+          <li>Switch the second bar between <b>Everywhere</b> and your country.</li>
+          <li>Read the label on the right-hand chip.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> the chip names <b>your actual country</b> (Egypt on an Egyptian phone — in Arabic <b>مصر</b>, not "Egypt"). Everywhere shows all communities; your country shows only the ones there. Neither should be empty — there are communities in Egypt and in Australia.</div>
+      <div class="tags"><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.6</div>
+      <h4>Creating one: badge and country are required</h4>
+      <ol>
+          <li>Tap <b>Create community</b>.</li>
+          <li>Try to save with no badge picked, and again with no country.</li>
+          <li>Add a banner image, pick <b>Butcher</b>, pick a country, fill in a phone and an address, and save.</li>
+          <li>Find it in the list and open it.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> it refuses to save without a badge or a country, and says why. The form <b>scrolls</b> — nothing is cut off at the bottom, and the keyboard does not hide the field you are typing in. After saving you are already a member of your own community.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.7</div>
+      <h4>Reaching a community</h4>
+      <ol>
+          <li>Open a community that has a phone number, a website or an address (try <b>Zamalek Butchers</b>).</li>
+          <li>Tap <b>Call</b>, then <b>Directions</b>, then the website.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> Call opens the dialler with the number, Directions opens maps at the address, and the website opens. A community with none of these shows no empty buttons.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.8</div>
+      <h4>Telling every member — owners only</h4>
+      <ol>
+          <li>As the <b>creator</b> of a community, write a post and tick <b>Notify the members</b>.</li>
+          <li>From a second account that is a MEMBER but not the creator, write a post and look for the same tick.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> the creator has the option and members' phones get the notification. A plain member <b>does not see the option at all</b>. This one matters: it is the difference between a noticeboard and a loudspeaker anyone can grab.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.9</div>
+      <h4>Butcher: meat ready for collection</h4>
+      <ol>
+          <li>Open a butcher community you own (<b>Zamalek Butchers</b>).</li>
+          <li>Tap <b>Meat ready</b>, enter a quantity like "8 kg of offcuts" and a collection window, and post it.</li>
+          <li>Look at the feed from another account in that community.</li>
+          <li>Set a window that has already passed, and look again.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> the offer shows the quantity and how long it is good for, and feeders and drivers in that community are told. An offer past its time is shown as <b>expired rather than deleted</b> — somebody arriving late should see they missed it, not find nothing and wonder.</div>
+      <div class="tags"><span class="tag p1">Important</span><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">9.10</div>
+      <h4>What a community card tells you</h4>
+      <ol>
+          <li>Look down the list of communities.</li>
+          <li>Find one with a banner image and one without.</li>
+      </ol>
+      <div class="exp"><b>Expect:</b> every card shows its badge, its area, a description, and how many posts and members it has. A community with no banner gets its badge mark on a tinted tile — <b>never a broken image and never a stray icon that belongs to a different badge</b>.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="10">
+  <div class="sec-head"><h2>10. Your profile</h2><span class="count"></span></div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.1</div>
+      <h4>Your name saves</h4>
+      <ol><li>Open your profile and change your display name in the cartouche.</li>
+          <li><b>Without</b> tapping anywhere else, close the page.</li>
+          <li>Come back.</li></ol>
+      <div class="exp"><b>Expect:</b> the new name is there. It must save even if you never tapped
+        away from the field.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.2</div>
+      <h4>Profile photo and cropping</h4>
+      <ol><li>Set a profile photo, crop it, save.</li>
+          <li>Check it on the map, in the feed and on a comment.</li></ol>
+      <div class="exp"><b>Expect:</b> the crop you chose is the one that shows, everywhere, without
+        restarting the app.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.3</div>
+      <h4>Language switch inside the app</h4>
+      <ol><li>Switch to Arabic from the profile, then move around every screen.</li>
+          <li>Close and reopen the app.</li></ol>
+      <div class="exp"><b>Expect:</b> the whole app changes immediately and <b>stays</b> Arabic after
+        a restart.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.4</div>
+      <h4>Help &amp; Guides</h4>
+      <ol><li>Open <b>Help &amp; Guides</b> from the profile settings.</li></ol>
+      <div class="exp"><b>Expect:</b> the help centre opens inside the app, loads, scrolls, and is in
+        the same language the app is in.</div>
+      <div class="tags"><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.5</div>
+      <h4>Sign out</h4>
+      <ol><li>Sign out, then reopen the app.</li></ol>
+      <div class="exp"><b>Expect:</b> you land on sign-in and stay signed out. No stale name or photo
+        from the last account anywhere.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.6</div>
+      <h4>Delete account</h4>
+      <ol><li>On a throwaway account, use <b>Delete account</b>.</li>
+          <li>Then try to sign in with it again.</li></ol>
+      <div class="exp"><b>Expect:</b> it asks you to confirm first, then deletes, signs you out, and
+        the account can no longer sign in. Apple requires this to work — treat a failure as a
+        release blocker.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">10.7</div>
+      <h4>My Rescues, Paws Helped, Top Rescuers</h4>
+      <ol><li>Visit each of these screens.</li></ol>
+      <div class="exp"><b>Expect:</b> the counts match what you've actually done in this session.
+        Empty tabs say something sensible rather than showing nothing.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Do the numbers match?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="11">
+  <div class="sec-head"><h2>11. Look &amp; feel — the regional skins</h2><span class="count"></span></div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">11.1</div>
+      <h4>Switching skin changes the artwork</h4>
+      <ol><li>Change the region / look in settings and go back to the map and feed.</li>
+          <li>Try at least three different regions.</li></ol>
+      <div class="exp"><b>Expect:</b> backgrounds and icons change to match. Nothing goes blank,
+        no leftover artwork from the previous skin, and text stays readable against every
+        background.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Which skins, and what happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="12">
+  <div class="sec-head"><h2>12. Notifications</h2><span class="count"></span></div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">12.1</div>
+      <h4>Notification while the app is closed</h4>
+      <ol><li>Trigger a notification (someone offers help on your report) with the app fully closed.</li></ol>
+      <div class="exp"><b>Expect:</b> it arrives on the lock screen and opens the right report when
+        tapped.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">12.2</div>
+      <h4>In-app activity feed</h4>
+      <ol><li>Open the Activity screen after a few things have happened.</li></ol>
+      <div class="exp"><b>Expect:</b> the events are listed newest first with sensible wording and
+        times, and tapping one takes you to the thing it's about.</div>
+      <div class="tags"><span class="tag ar">Arabic</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">12.3</div>
+      <h4>Refusing notifications doesn't break anything</h4>
+      <ol><li>Settings → Spot a Paw → Notifications → off. Use the app normally for five minutes.</li></ol>
+      <div class="exp"><b>Expect:</b> everything still works. No nagging, no crash, no repeated
+        prompt.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="13">
+  <div class="sec-head"><h2>13. Privacy — what a normal user must NOT see</h2><span class="count"></span></div>
+  <p class="sec-lede">Do this section from an <b>ordinary</b> account, not an admin one. Anything
+    that fails here is serious, so describe it precisely.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">13.1</div>
+      <h4>You can't promote yourself</h4>
+      <ol><li>Hunt through every settings screen for anything that would make you an admin, a
+        verified feeder, or a caretaker.</li></ol>
+      <div class="exp"><b>Expect:</b> no such control exists for an ordinary account. If you find one
+        and it works, stop and report it immediately.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What did you find?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">13.2</div>
+      <h4>Signing in doesn't quietly change your role</h4>
+      <ol><li>Note your role. Sign out.</li>
+          <li>On the sign-in screen, tap a <b>different</b> role icon before signing in.</li>
+          <li>Sign in and check your role.</li></ol>
+      <div class="exp"><b>Expect:</b> your role is unchanged. The role picker on that screen is for
+        <b>creating</b> an account, and signing in must never rewrite it.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What role were you before and after?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">13.3</div>
+      <h4>Other people's exact locations</h4>
+      <ol><li>Look at a sensitive feeding spot you don't own (see 8.3) and at other people's reports.</li></ol>
+      <div class="exp"><b>Expect:</b> no exact coordinates for sensitive spots, and no home addresses
+        or phone numbers of other users anywhere.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What could you see?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">13.4</div>
+      <h4>The admin screen is not reachable</h4>
+      <ol><li>From an ordinary account, look for any admin or dashboard entry point.</li></ol>
+      <div class="exp"><b>Expect:</b> none is offered, and if you reach one somehow it refuses to
+        load data.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="14">
+  <div class="sec-head"><h2>14. Bad network, and edges</h2><span class="count"></span></div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">14.1</div>
+      <h4>No connection at all</h4>
+      <ol><li>Turn on aeroplane mode and open the app.</li>
+          <li>Try to open the feed, and try to submit a report.</li></ol>
+      <div class="exp"><b>Expect:</b> the app says it can't reach the internet. It should not hang
+        forever on a spinner or crash. Cached artwork should still draw.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">14.2</div>
+      <h4>Losing signal mid-upload</h4>
+      <ol><li>Start submitting a report with a photo, then switch on aeroplane mode straight away.</li></ol>
+      <div class="exp"><b>Expect:</b> it fails and <b>says so</b>. What it must not do is claim
+        success, or leave a half-saved report with no photo.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">14.3</div>
+      <h4>Interruptions</h4>
+      <ol><li>While in the middle of a report, take a phone call or switch apps for a minute, then
+        come back.</li></ol>
+      <div class="exp"><b>Expect:</b> your half-finished report is still there.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">14.4</div>
+      <h4>Rotate, and large text</h4>
+      <ol><li>Turn the phone sideways on the map, the feed and a report.</li>
+          <li>Settings → Accessibility → Display → Larger Text, turn it well up, then reopen the app.</li></ol>
+      <div class="exp"><b>Expect:</b> nothing overlaps, nothing is cut off, and no yellow-and-black
+        overflow stripes appear. Buttons stay tappable.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Which screens broke?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="15">
+  <div class="sec-head"><h2>15. The Arabic pass</h2><span class="count"></span></div>
+  <p class="sec-lede">Switch the app to Arabic and repeat every case tagged
+    <span class="tag ar">Arabic</span> above. Then do these four, which only make sense in Arabic.</p>
+
+  <div class="case" data-p="0">
+    <input type="checkbox">
+    <div>
+      <div class="id">15.1</div>
+      <h4>Nothing is left in English</h4>
+      <ol><li>With the app in Arabic, visit every screen and read every button, label, tab, empty
+        state, error message and pop-up.</li></ol>
+      <div class="exp"><b>Expect:</b> all of it in Arabic. Brand names (Spot a Paw, Google, Apple,
+        One Tail One Meal) stay in Latin script — that's correct, not a bug. Note <b>every</b>
+        English word you find and where.</div>
+      <div class="tags"><span class="tag p0">Must pass</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="List every English string you found, and the screen it was on."></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">15.2</div>
+      <h4>The layout is properly mirrored</h4>
+      <ol><li>Look at the bottom bar, the back arrows, the icons beside text, and the sliders.</li></ol>
+      <div class="exp"><b>Expect:</b> everything reads right-to-left. Back arrows point right. Icons
+        sit on the right of their labels. Nothing is squashed against an edge.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What was mirrored wrongly?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">15.3</div>
+      <h4>Times and numbers</h4>
+      <ol><li>Look at "2 hours ago" style timestamps and any counts, in Arabic.</li></ol>
+      <div class="exp"><b>Expect:</b> the relative times are in Arabic, not English. Numbers are
+        consistent throughout — not Arabic-Indic in one place and Western in another on the same
+        screen.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">15.4</div>
+      <h4>Typing Arabic</h4>
+      <ol><li>Write a report description, a comment and a community post, all in Arabic.</li></ol>
+      <div class="exp"><b>Expect:</b> it saves and displays right-to-left, unmangled, with no
+        question marks or boxes instead of letters.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="16">
+  <div class="sec-head"><h2>16. Websites</h2><span class="count"></span></div>
+  <p class="sec-lede">Quick pass on a phone browser, not the app.</p>
+
+  <div class="case" data-p="1">
+    <input type="checkbox">
+    <div>
+      <div class="id">16.1</div>
+      <h4>spot-a-paw.com</h4>
+      <ol><li>Open <a href="https://spot-a-paw.com">spot-a-paw.com</a> on a phone. Scroll it all.
+        Try the menu, and the Arabic version.</li></ol>
+      <div class="exp"><b>Expect:</b> everything loads, images appear, nothing scrolls sideways, the
+        menu opens and closes, and every link works.</div>
+      <div class="tags"><span class="tag p1">Important</span></div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">16.2</div>
+      <h4>The help centre</h4>
+      <ol><li>Open <a href="https://spot-a-paw.com/help.html">spot-a-paw.com/help.html</a>, use the
+        search box, open a few topics.</li></ol>
+      <div class="exp"><b>Expect:</b> search filters the topics, screenshots load, and the advice
+        matches what the app actually does.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="Anything out of date?"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">16.3</div>
+      <h4>The One Tail One Meal page</h4>
+      <ol><li>Open <a href="https://spot-a-paw.com/otom/">spot-a-paw.com/otom/</a> and the Arabic
+        version at <code>/otom/index-ar.html</code>.</li></ol>
+      <div class="exp"><b>Expect:</b> loads on a phone, the globe turns, both language links work,
+        and every claim on the page reads as honest rather than overstated.</div>
+      <label class="flag"><input type="checkbox" class="fl"> Problem</label>
+      <textarea placeholder="What happened?"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<section data-sec="17">
+  <div class="sec-head"><h2>17. The overall impression</h2><span class="count"></span></div>
+  <p class="sec-lede">Not pass/fail. Answer these in your own words — they're often more useful than
+    the bug list.</p>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">17.1</div>
+      <h4>Could you use it without being told how?</h4>
+      <div class="exp">Where did you hesitate? What did you tap that did nothing? What did you
+        expect to find and couldn't?</div>
+      <textarea placeholder="In your own words..." style="min-height:80px"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">17.2</div>
+      <h4>Did anything feel slow?</h4>
+      <div class="exp">Name the screen and roughly how long it took.</div>
+      <textarea placeholder="In your own words..." style="min-height:80px"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">17.3</div>
+      <h4>Would you trust it with a real animal?</h4>
+      <div class="exp">If you found a hurt dog on your street tonight, would you use this — and if
+        not, what's missing?</div>
+      <textarea placeholder="In your own words..." style="min-height:80px"></textarea>
+    </div>
+  </div>
+
+  <div class="case" data-p="2">
+    <input type="checkbox">
+    <div>
+      <div class="id">17.4</div>
+      <h4>The three worst things</h4>
+      <div class="exp">Of everything you saw, the three that would most put a real user off.</div>
+      <textarea placeholder="1. &#10;2. &#10;3. " style="min-height:100px"></textarea>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>Spot a Paw · test plan for 1.0.1 build 15 · Your ticks and notes are saved in this browser only.
+    Use <b>Print</b> to save the completed sheet as a PDF and send it back.</p>
+</footer>
+</main>
+
+<script>
+(function () {
+  var KEY = 'sap-testplan-v1';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private window */ }
+  }
+
+  // Give every case a stable id from its printed number, so restoring survives
+  // re-ordering of anything else on the page.
+  var cases = Array.prototype.slice.call(document.querySelectorAll('.case'));
+  cases.forEach(function (c) {
+    var idEl = c.querySelector('.id');
+    var id = idEl ? idEl.textContent.trim() : null;
+    if (!id) { id = 'x' + cases.indexOf(c); }
+    c.dataset.id = id;
+
+    var done = c.querySelector('input[type=checkbox]:not(.fl)');
+    var flag = c.querySelector('.fl');
+    var note = c.querySelector('textarea');
+    var s = state[id] || {};
+
+    if (done) { done.checked = !!s.done; }
+    if (flag) { flag.checked = !!s.flag; }
+    if (note) { note.value = s.note || ''; }
+    paint(c);
+
+    if (done) done.addEventListener('change', function () {
+      (state[id] = state[id] || {}).done = done.checked; save(); paint(c); refresh();
+    });
+    if (flag) flag.addEventListener('change', function () {
+      (state[id] = state[id] || {}).flag = flag.checked; save(); paint(c); refresh();
+    });
+    if (note) note.addEventListener('input', function () {
+      (state[id] = state[id] || {}).note = note.value; save();
+    });
+  });
+
+  function paint(c) {
+    var done = c.querySelector('input[type=checkbox]:not(.fl)');
+    var flag = c.querySelector('.fl');
+    c.classList.toggle('done', !!(done && done.checked) && !(flag && flag.checked));
+    c.classList.toggle('flagged', !!(flag && flag.checked));
+  }
+
+  // filters
+  var only = { open: false, flag: false, p0: false };
+  function refresh() {
+    var total = cases.length, done = 0;
+    cases.forEach(function (c) {
+      var d = c.querySelector('input[type=checkbox]:not(.fl)');
+      var f = c.querySelector('.fl');
+      if (d && d.checked) done++;
+      var hide = false;
+      if (only.open && d && d.checked) hide = true;
+      if (only.flag && !(f && f.checked)) hide = true;
+      if (only.p0 && c.dataset.p !== '0') hide = true;
+      c.classList.toggle('hide', hide);
+    });
+    // per-section counts, and hide a section with nothing left to show
+    document.querySelectorAll('section[data-sec]').forEach(function (sec) {
+      var all = sec.querySelectorAll('.case');
+      var vis = sec.querySelectorAll('.case:not(.hide)');
+      var dn = 0;
+      all.forEach(function (c) {
+        var d = c.querySelector('input[type=checkbox]:not(.fl)');
+        if (d && d.checked) dn++;
+      });
+      var label = sec.querySelector('.count');
+      if (label) label.textContent = dn + ' / ' + all.length;
+      sec.classList.toggle('hide', vis.length === 0);
+    });
+    var pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('cnt').textContent = done + ' / ' + total;
+    document.getElementById('fill').style.width = pct + '%';
+  }
+
+  function toggle(btnId, key) {
+    var b = document.getElementById(btnId);
+    b.addEventListener('click', function () {
+      only[key] = !only[key];
+      b.classList.toggle('on', only[key]);
+      refresh();
+    });
+  }
+  toggle('fOpen', 'open');
+  toggle('fFlag', 'flag');
+  toggle('fP0', 'p0');
+
+  document.getElementById('doPrint').addEventListener('click', function () {
+    only = { open: false, flag: false, p0: false };
+    ['fOpen', 'fFlag', 'fP0'].forEach(function (i) { document.getElementById(i).classList.remove('on'); });
+    refresh();
+    window.print();
+  });
+
+  document.getElementById('doReset').addEventListener('click', function () {
+    if (!confirm('Clear every tick and note on this sheet?')) return;
+    state = {}; save();
+    cases.forEach(function (c) {
+      var d = c.querySelector('input[type=checkbox]:not(.fl)');
+      var f = c.querySelector('.fl');
+      var n = c.querySelector('textarea');
+      if (d) d.checked = false;
+      if (f) f.checked = false;
+      if (n) n.value = '';
+      paint(c);
+    });
+    refresh();
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>

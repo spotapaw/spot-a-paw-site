@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spot a Paw — See it. Spot it. Save it.</title>
+<meta name="description" content="Spot a Paw brings AI-assisted tools and local people together to help street animals: photo-assisted reports, smarter feeding rounds and butcher meat offers. The app behind One Tail One Meal.">
+<link rel="canonical" href="https://spot-a-paw.com/">
+<link rel="alternate" hreflang="en" href="https://spot-a-paw.com/">
+<link rel="alternate" hreflang="ar" href="https://spot-a-paw.com/index-ar.html">
+<meta property="og:url" content="https://spot-a-paw.com/">
+<meta property="og:title" content="Spot a Paw — See it. Spot it. Save it.">
+<meta property="og:description" content="Spot a Paw brings AI-assisted tools and local people together to help street animals: photo-assisted reports, smarter feeding rounds and butcher meat offers. The app behind One Tail One Meal.">
+<meta property="og:image" content="https://spot-a-paw.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spot a Paw">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://spot-a-paw.com/assets/og.png">
+<link rel="icon" href="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=6c07fc6d">
+<style>
+  .nav-links a{white-space:nowrap}
+  .lang-switch{display:inline-flex;gap:.4rem;align-items:center;background:rgba(242,235,221,.12);
+               border:1px solid rgba(242,235,221,.3);border-radius:999px;padding:.3rem .5rem}
+  .lang-switch a{color:var(--ivory);text-decoration:none;font-weight:700;font-size:.86rem;
+                 padding:.28rem .7rem;border-radius:999px;opacity:.75}
+  .lang-switch a.on{background:var(--orange);color:#fff;opacity:1}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.02}
+  .hero-small{margin-top:.5rem;font-size:.9rem}
+  .hero-small a{color:var(--orange)}
+  .duo{position:relative;height:min(640px,150vw);max-width:520px;margin:0 auto;width:100%}
+  .duo .phone{position:absolute;width:min(270px,58%)}
+  .duo .p1{left:0;top:0;z-index:2}
+  .duo .p2{right:0;top:12%;transform:rotate(3deg)}
+  .duo-cap{position:absolute;z-index:3;background:var(--nile);color:var(--ivory);font-weight:700;
+           font-size:.82rem;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(242,235,221,.18)}
+  .duo-cap.c1{left:2%;bottom:6%}
+  .duo-cap.c2{right:0;top:6%}
+  .three .card{text-align:start}
+  .three .icon{width:64px;height:64px;object-fit:contain;margin-bottom:.6rem}
+  .support{margin-top:1.6rem;font-weight:600;color:var(--orange)}
+  .shot-card{display:flex;flex-direction:column;gap:1rem}
+  .shot-card .shot{border-radius:22px;overflow:hidden;background:var(--deep);aspect-ratio:9/13;
+                   box-shadow:var(--shadow-s)}
+  .shot-card .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+  .stages{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1rem 0 1.4rem}
+  .stages .arrow{color:var(--muted);font-weight:800}
+  .stage{padding:.35rem .8rem;border-radius:999px;font-weight:800;font-size:.85rem}
+  .stage.s1{background:#E0A800;color:#fff}.stage.s2{background:#FF7900;color:#174D43}.stage.s3{background:#2E7D32;color:#fff}
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .role{display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--line);border-radius:18px;
+        padding:1rem 1.1rem;text-decoration:none;color:var(--deep);font-weight:700;box-shadow:var(--shadow-s)}
+  .role img{width:46px;height:46px;object-fit:contain}
+  .role span{display:block;font-weight:500;font-size:.88rem;color:var(--muted)}
+  .role:hover{border-color:var(--orange)}
+  .limits{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0}
+  .limits span{background:rgba(242,235,221,.1);border:1px solid rgba(242,235,221,.25);color:var(--ivory);
+               border-radius:999px;padding:.4rem .85rem;font-size:.88rem;font-weight:600}
+  .future{display:inline-block;background:rgba(255,121,0,.18);color:var(--orange);font-weight:800;
+          border-radius:999px;padding:.3rem .8rem;font-size:.8rem;letter-spacing:.04em;margin-bottom:.8rem}
+  @media (max-width:900px){.roles{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.roles{grid-template-columns:1fr}.duo{height:128vw}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/brand_logo_spot_v1.png" alt="Spot a Paw"> Spot a Paw</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Smart tools</a>
+      <a href="#community">Community</a>
+      <a href="#impact">Impact</a>
+      <a href="help.html">Help centre</a>
+      <span class="lang-switch"><a class="on" href="index.html">English</a><a href="index-ar.html">العربية</a></span>
+      <a class="btn btn-orange btn-sm" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">Open the app</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Community-powered care · AI-assisted tools</span>
+      <h1>See it. <span class="accent">Spot it.</span> Save it.</h1>
+      <p class="lead">Help street animals with people nearby. Report an animal, organise a feeding round or collect donated food—with AI-assisted tools to help you get started.</p>
+      <div class="hero-cta">
+        <a class="btn btn-orange" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">Open the app</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note">Use it in your browser. iPhone access is currently via TestFlight.</p>
+      <p class="hero-small"><a href="mailto:support@spot-a-paw.com?subject=TestFlight%20invite%20please">Request an iPhone invite</a></p>
+    </div>
+    <div class="duo" aria-label="The Spot a Paw report form · A planned feeding route">
+      <div class="phone p1"><div class="notch"></div><div class="screen"><img class="on" src="assets/screens/ai_report.jpg" alt="The Spot a Paw report form"></div></div>
+      <div class="phone p2"><div class="notch"></div><div class="screen"><img class="on" src="assets/screens/ai_rounds.jpg" alt="A planned feeding route"></div></div>
+      <span class="duo-cap c1">📷 A report starts with a photo</span>
+      <span class="duo-cap c2">🐾 Plan your feeding round</span>
+    </div>
+  </div>
+</header>
+
+<section id="how" class="papyrus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>See an animal in need? Start here.</h2>
+    </div>
+    <div class="grid g3 three">
+      <div class="card reveal"><img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/nav_map_o1.png" alt=""><h3>See it</h3><p class="muted">Find reported animals nearby, feeding spots, vets and shelters.</p></div>
+      <div class="card reveal"><img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/nav_spot_a_paw_o1.png" alt=""><h3>Spot it</h3><p class="muted">Add a photo, review the suggested details and confirm the location before sharing.</p></div>
+      <div class="card reveal"><img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_driver_o.png" alt=""><h3>Save it</h3><p class="muted">Offer help, feed a colony or collect donated food with your community.</p></div>
+    </div>
+    <p class="support reveal">Help in the way you can.</p>
+  </div>
+</section>
+
+<section id="features" class="nile-bg" style="background:var(--deep)">
+  <span id="smart"></span>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">AI & smart tools</span>
+      <h2>Smarter ways to help street animals</h2>
+      <p class="lead">Create a report from a photo, plan your next feeding round and see the latest updates from nearby colonies. Spot a Paw helps you coordinate care with your community, with AI suggestions you can review before sharing.</p>
+    </div>
+    <div class="grid g3">
+      <div class="shot-card reveal"><div class="shot"><img loading="lazy" src="assets/screens/ai_report.jpg" alt="Photo-assisted reports"></div><h3>Photo-assisted reports</h3><p class="muted">Add a photo and let AI suggest the report details. Check them, add anything it missed and share.</p></div>
+      <div class="shot-card reveal"><div class="shot"><img loading="lazy" src="assets/screens/ai_rounds.jpg" alt="Plan your feeding round"></div><h3>Plan your feeding round</h3><p class="muted">Choose your starting point, distance and stops. Get suggested routes using the community’s feeding records.</p></div>
+      <div class="shot-card reveal"><div class="shot"><img loading="lazy" src="assets/screens/ai_colony.jpg" alt="Follow each colony’s care"></div><h3>Follow each colony’s care</h3><p class="muted">See recorded feeds, estimated animal numbers and sterilisation updates in one place.</p></div>
+    </div>
+    <p class="reveal" style="margin-top:2rem"><a class="btn btn-orange" href="ai.html">Explore the smart tools</a></p>
+  </div>
+</section>
+
+<section id="community" class="papyrus">
+  <div class="wrap feature">
+    <div class="reveal">
+      <span class="eyebrow">Food collections</span>
+      <h2>Connect donated food with local feeders</h2>
+      <p class="lead">Butchers can offer food for collection, and community members can coordinate the pickup. See what is available, where to collect it and who is on the way.</p>
+      <div class="stages"><span class="stage s1">Ready for collection</span><span class="arrow" aria-hidden="true">→</span><span class="stage s2">On the way</span><span class="arrow" aria-hidden="true">→</span><span class="stage s3">Collected</span></div>
+      <a class="btn btn-orange" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">Find your community</a>
+    </div>
+    <div class="phone-wrap reveal"><div class="phone"><div class="notch"></div><div class="screen"><img class="on" loading="lazy" src="assets/screens/meat_offer.jpg" alt="A butcher community with a meat offer ready for collection"></div></div></div>
+  </div>
+</section>
+
+<section id="impact" class="nile-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Community impact</span>
+      <h2>See the care your community provides</h2>
+      <p class="lead">Follow recorded feeds, food collections and rescue updates. See each colony’s feeding history and the milestones people share—from rescue and adoption to microchipping and sterilisation.</p>
+    </div>
+    <div class="grid g2">
+      <div class="shot-card reveal"><div class="shot"><img loading="lazy" src="assets/screens/ai_colony.jpg" alt="A feeding spot with its feeding history"></div><h3>Feeding history</h3></div>
+      <div class="shot-card reveal"><div class="shot"><img loading="lazy" src="assets/screens/success_stories.jpg?v=b4a9eaef" alt="Success Stories"></div><h3>Rescue milestones</h3></div>
+    </div>
+  </div>
+</section>
+
+<section id="mission" class="papyrus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Community roles</span>
+      <h2>Help in the way you can</h2>
+      <p class="lead">Feeders, rescuers, drivers, vets, shelters and butchers all have a part to play. Find people nearby and work together to help street animals.</p>
+    </div>
+    <div class="roles">
+      <a class="role reveal" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_feeder_o.png" alt=""><div>I can feed<span>Feed a local colony</span></div></a>
+      <a class="role reveal" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_driver_o.png" alt=""><div>I can drive<span>Drive an animal to care</span></div></a>
+      <a class="role reveal" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_rescuer_o.png" alt=""><div>I can rescue<span>Help an animal reach safety</span></div></a>
+      <a class="role reveal" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_vet_o.png" alt=""><div>I’m a vet<span>Provide treatment and sterilisation</span></div></a>
+      <a class="role reveal" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_shelter_o.png" alt=""><div>I run a shelter<span>Offer a place to recover</span></div></a>
+      <a class="role reveal" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_butcher_o.png" alt=""><div>I can offer food<span>Offer food for collection</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section id="trust" class="nile-bg" style="background:var(--deep)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">AI control</span>
+      <h2>You stay in control</h2>
+      <p class="lead">Review AI-suggested details before posting and choose the route that works for you. Suggestions can be wrong, and you can edit them.</p>
+      <p><a class="btn btn-ghost" href="ai.html#your-control">How AI assistance works →</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="mothership" class="nile-bg">
+  <div class="wrap ship">
+    <div class="reveal">
+      <span class="eyebrow">One Tail One Meal</span>
+      <h2>Because every tail deserves a meal</h2>
+      <p class="lead">Spot a Paw supports One Tail One Meal by connecting the people who provide food and care for street animals.</p>
+      <span class="future">Future plans</span>
+      <p class="lead">Feeding and collection records could help plan future food truck routes and portions. Food trucks are a planned phase.</p>
+      <a class="btn btn-orange" href="https://onetailonemeal.com" target="_blank" rel="noopener">Meet One Tail One Meal →</a>
+    </div>
+    <div class="reveal">
+      <div class="globe-mark" role="img" aria-label="One Tail One Meal">
+        <img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/globe_plate_v1.png?v=5" alt="">
+        <div class="globe-shadow"></div>
+        <div class="globe"><canvas id="globe3d"></canvas></div>
+        <img class="plate-front" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/globe_plate_v1.png?v=5" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skins" class="skins">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Regional appearance</span>
+      <h2>Choose your look</h2>
+      <p class="lead">Choose Egyptian, No Frills, South Asia, Southeast Asia, West Asia, South America or Africa. Your reports, routes and communities stay with you when you change the look.</p>
+    </div>
+    <div class="skin-rotator reveal">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <img class="skin-slide on" src="assets/screens/skin_feed_eg.jpg?v=4cc9b53f" alt="Egyptian" data-name="Egyptian" data-blurb="Papyrus scrolls, Nile scenes">
+        <img class="skin-slide" src="assets/screens/skin_feed_standard.jpg?v=b6f47047" alt="No Frills" data-name="No Frills" data-blurb="Flat and plain, easy on the eyes">
+        <img class="skin-slide" src="assets/screens/skin_feed_south-asia.jpg?v=b326702d" alt="South Asia" data-name="South Asia" data-blurb="Fibre paper, rivers and rice fields">
+        <img class="skin-slide" src="assets/screens/skin_feed_southeast-asia.jpg?v=9d191f3d" alt="Southeast Asia" data-name="Southeast Asia" data-blurb="Mulberry paper, bamboo and terraces">
+        <img class="skin-slide" src="assets/screens/skin_feed_west-asia.jpg?v=4e20fefc" alt="West Asia" data-name="West Asia" data-blurb="Parchment, palms and stone courtyards">
+        <img class="skin-slide" src="assets/screens/skin_feed_south-america.jpg?v=d0b98977" alt="South America" data-name="South America" data-blurb="Woven paper, rivers and highlands">
+        <img class="skin-slide" src="assets/screens/skin_feed_africa.jpg?v=2b0b57a6" alt="Africa" data-name="Africa" data-blurb="Earth pigments, savannah light and woven cloth">
+      </div></div>
+      <figcaption class="skin-cap"><b>Egyptian</b><span>Papyrus scrolls, Nile scenes</span></figcaption>
+      <div class="skin-dots">
+      <button class="skin-dot on" type="button" data-i="0" aria-label="Egyptian"></button>
+      <button class="skin-dot" type="button" data-i="1" aria-label="No Frills"></button>
+      <button class="skin-dot" type="button" data-i="2" aria-label="South Asia"></button>
+      <button class="skin-dot" type="button" data-i="3" aria-label="Southeast Asia"></button>
+      <button class="skin-dot" type="button" data-i="4" aria-label="West Asia"></button>
+      <button class="skin-dot" type="button" data-i="5" aria-label="South America"></button>
+      <button class="skin-dot" type="button" data-i="6" aria-label="Africa"></button>
+      </div>
+    </div>
+    <p class="muted skin-note"><a href="help.html#skins">How Look & feel works →</a></p>
+  </div>
+</section>
+
+<section id="get" class="papyrus">
+  <div class="wrap grid g2" style="align-items:center">
+    <div class="reveal">
+      <span class="eyebrow">Get the app</span>
+      <h2>Help a street animal today</h2>
+      <p class="lead">Report an animal, feed a colony, collect donated food or join a local community.</p>
+      <div class="hero-cta">
+        <a class="btn btn-orange" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">Open the app</a>
+        <a class="btn btn-nile" href="mailto:support@spot-a-paw.com?subject=TestFlight%20invite%20please">Request an iPhone invite</a>
+      </div>
+      <p class="muted" style="margin-top:1rem">Questions? <a href="help.html">The help centre</a> shows you every screen, or write to <a href="mailto:support@spot-a-paw.com">support@spot-a-paw.com</a>.</p>
+    </div>
+    <div class="card nile reveal" style="text-align:center;padding:2.2rem">
+      <img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png" alt="Spot a Paw" style="width:120px;margin:0 auto 1rem;border-radius:28px;box-shadow:var(--shadow)">
+      <h3>See it. Spot it. Save it.</h3>
+      <p class="muted">Free. No ads. Made by people who feed strays.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/brand_logo_spot_v1.png" alt=""> Spot a Paw</a>
+      <p style="margin-top:.8rem;max-width:40ch">The rescue map for stray animals. The technology arm of <a href="https://onetailonemeal.com" target="_blank" rel="noopener">One Tail One Meal</a>.</p>
+    </div>
+    <div>
+      <h4>App</h4>
+      <ul><li><a href="https://spot-a-paw.com/app/">Web app</a></li><li><a href="ai.html">Smart tools</a></li><li><a href="help.html">Help centre</a></li><li><a href="help.html#account">Account &amp; privacy</a></li><li><a href="help.html#trouble">Troubleshooting</a></li><li><a href="privacy.html">Privacy policy</a></li></ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul><li><a href="mailto:support@spot-a-paw.com">support@spot-a-paw.com</a></li><li><a href="https://onetailonemeal.com" target="_blank" rel="noopener">onetailonemeal.com</a></li></ul>
+    </div>
+    <div class="copy">© 2026 One Tail One Meal · Spot a Paw. See it. Spot it. Save it.</div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=381eac63"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// Real 3D globe inside the One Tail One Meal plate: a lit sphere with the
+// brand-coloured equirectangular map, slow rotation, soft rim. Falls back to
+// the CSS map scroll if WebGL is unavailable.
+// One instance per canvas. This began as getElementById('globe3d') and so
+// could only ever render one globe; the vision card needs a second.
+Array.prototype.forEach.call(
+  document.querySelectorAll('#globe3d, canvas.globe3d'), function (canvas) {
+  if (!canvas || !window.THREE) return;
+  var holder = canvas.parentElement;
+  var renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true }); }
+  catch (e) { return; }
+  holder.classList.add('gl');
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  // Colour-exact path: texture bytes pass straight through (no sRGB<->linear round trip,
+  // which double-encodes and turns #FF7900 into amber). Measured: 255,121,0 in, 255,121,0 out.
+  renderer.toneMapping = THREE.NoToneMapping;
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
+  // 3.9 makes the sphere overfill the canvas circle by ~2%, so the plate art covers its limb.
+  camera.position.set(0, 0, 3.9);
+  var tex = new THREE.TextureLoader().load('assets/globe_equirect.png', function (t) {
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    t.needsUpdate = true;
+  });
+  // Unlit: the map's colours land pixel-exact (#FF7900 on #F2EBDD). The
+  // sphere shading is a CSS overlay on the canvas (.globe.gl::after).
+  var globe = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 96, 96),
+    new THREE.MeshBasicMaterial({ map: tex })
+  );
+  globe.rotation.order = 'ZYX';
+  globe.rotation.z = 0.32; // a little axial tilt so it reads as a planet, not a diagram
+  // Which longitude faces the camera at rotation 0 depends on the geometry's UV
+  // seam; calibrated empirically (see START below).
+  var START = THREE.MathUtils.degToRad(parseFloat(new URLSearchParams(location.search).get('rot') || '240'));
+  globe.rotation.y = START;
+  window.__globeRot = function (deg) { globe.rotation.y = THREE.MathUtils.degToRad(deg); renderer.render(scene, camera); };
+  scene.add(globe);
+  function size() {
+    var s = holder.clientWidth || 120;
+    renderer.setSize(s, s, false);
+    camera.aspect = 1; camera.updateProjectionMatrix();
+  }
+  size(); window.addEventListener('resize', size);
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var visible = true;
+  new IntersectionObserver(function (es) { es.forEach(function (e) { visible = e.isIntersecting; }); }).observe(holder);
+  var last = 0;
+  function frame(t) {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    var dt = Math.min(0.05, (t - last) / 1000 || 0); last = t;
+    if (!reduce) globe.rotation.y += dt * 0.28; // one turn ≈ 22 s
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>

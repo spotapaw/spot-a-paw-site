@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.onetailonemeal.spotapaw",
+      "sha256_cert_fingerprints": [
+        "78:87:5A:07:BA:5F:4E:CE:44:84:54:6F:EB:1B:FC:59:2D:1C:8F:14:CC:8C:FC:37:AE:05:FC:62:82:5A:0F:07"
+      ]
+    }
+  }
+]

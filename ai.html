@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How AI helps you care for street animals | Spot a Paw</title>
+<meta name="description" content="Turn photos into draft reports, search in your own words, plan feeding rounds from recorded feeds and translate community updates. You review suggestions and decide what to do next.">
+<link rel="canonical" href="https://spot-a-paw.com/ai.html">
+<meta property="og:url" content="https://spot-a-paw.com/ai.html">
+<meta property="og:title" content="How AI helps you care for street animals | Spot a Paw">
+<meta property="og:description" content="Draft reports from photos, feeding rounds planned from recorded feeds and translated community updates. You review suggestions and decide what to do next.">
+<meta property="og:image" content="https://spot-a-paw.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spot a Paw">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://spot-a-paw.com/assets/og.png">
+<link rel="alternate" hreflang="en" href="https://spot-a-paw.com/ai.html">
+<link rel="alternate" hreflang="ar" href="https://spot-a-paw.com/ai-ar.html">
+
+<link rel="icon" href="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=6c07fc6d">
+<style>
+.tool-row{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start}
+.tool-row .icon{margin:0;width:34px;height:34px;flex:0 0 34px}
+.tool-row p:last-child{margin-bottom:0}
+.note-strip{border-left:3px solid var(--orange);padding:.15rem 0 .15rem 1rem;margin:1rem 0 0}
+.lang-switch{display:inline-flex;gap:.4rem;align-items:center;background:rgba(242,235,221,.12);
+             border:1px solid rgba(242,235,221,.3);border-radius:999px;padding:.3rem .5rem}
+.lang-switch a{color:var(--ivory);text-decoration:none;font-weight:700;font-size:.86rem;
+               padding:.28rem .7rem;border-radius:999px;opacity:.75}
+.lang-switch a.on{background:var(--orange);color:#fff;opacity:1}
+
+/* Tasks on one side, the matching app screen(s) on the other. */
+.tool-split{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:3rem;align-items:center}
+.tool-list{display:grid;gap:1.2rem}
+.tool-split.flip .shots{order:-1}
+@media (max-width:900px){.tool-split{grid-template-columns:minmax(0,1fr);gap:1.6rem}.tool-split.flip .shots{order:0}}
+
+/* App screenshots: real captures in the site's phone frame. */
+.shots{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;margin:0}
+.shots figure{margin:0;text-align:center;max-width:240px}
+.shots .phone{width:min(230px,70vw)}
+.shots.pair{gap:1.2rem}
+.shots.pair figure{max-width:200px}
+.shots.pair .phone{width:min(200px,40vw)}
+.shots .phone .screen img{opacity:1}
+.shots figcaption{margin-top:.8rem;font-size:.9rem;line-height:1.45;opacity:.85}
+.shots-note{text-align:center;font-size:.85rem;margin:1.6rem 0 0}
+  .help-hero .lead{color:rgba(242,235,221,.88)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/brand_logo_spot_v1.png" alt="Spot a Paw"> Spot a Paw</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="index.html#how">How it works</a>
+      <a href="ai.html">Smart tools</a>
+      <a href="index.html#community">Community</a>
+      <a href="index.html#mothership">One Tail One Meal</a>
+      <a href="help.html">Help centre</a>
+      <span class="lang-switch"><a class="on" href="ai.html">English</a><a href="ai-ar.html">العربية</a></span>
+      <a class="btn btn-orange btn-sm" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">Open the app</a>
+    </div>
+  </div>
+</nav>
+
+<header class="help-hero">
+  <div class="wrap">
+    <span class="eyebrow">Smart tools</span>
+    <h1>How AI helps you care for <span class="accent">street animals</span></h1>
+    <p class="lead">Turn photos into draft reports, search reports in your own words and translate community updates. Feeding records also help you plan routes and follow each colony’s care. You review suggestions and decide what to do next.</p>
+  </div>
+</header>
+
+<!-- ── Reporting and finding animals ─────────────────────────────────── -->
+<section class="papyrus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Spot and report</span>
+      <h2>Reporting and finding animals</h2>
+    </div>
+
+    <div class="tool-split">
+      <div class="tool-list">
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/nav_spot_a_paw_o1.png" alt="">
+            <div>
+              <h3>Create a report from a photo</h3>
+              <p class="muted">Add a photo and AI suggests details about the animal and its visible needs. Review the draft, correct anything it missed and confirm the location before posting.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/hover_filters_o.png" alt="">
+            <div>
+              <h3>Check whether an animal has already been reported</h3>
+              <p class="muted">Before your report is posted, the app looks for what may be the same animal reported nearby in the last three days. Check the photo and choose whether to help on that report or post your own.</p>
+              <h3>Search in your own words</h3>
+              <p class="muted">Describe the animal or situation you are looking for. Search can suggest related reports even when the wording differs. Check the photos and details to confirm a match.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shots reveal">
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_report.jpg" alt="Spot a Paw report form" loading="lazy"></div></div><figcaption>The report form: add a photo, then check the kind of animal and what it needs.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Planning and coordination ─────────────────────────────────────── -->
+<section class="nile-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Plan and coordinate</span>
+      <h2>Planning and coordination</h2>
+    </div>
+
+    <div class="tool-split flip">
+      <div class="tool-list">
+        <div class="card deep reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/act_route_o.png" alt="">
+            <div>
+              <h3>Plan around colonies overdue for a recorded feed</h3>
+              <p class="muted">Choose where you start, how far you can travel and how many stops you can make. Suggested routes use recorded feeding patterns to highlight colonies that may need a visit. Review and edit the stops before you go.</p>
+              <p class="note-strip muted">A missing check-in does not necessarily mean the animals have not been fed.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card deep reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_butcher_o.png" alt="">
+            <div>
+              <h3>Help donated food reach local feeders</h3>
+              <p class="muted">See food offers, collection addresses and pickup windows. Coordinate with the community so people know who is on the way and when the food has been collected.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card deep reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/place_feedspots_o1.png" alt="">
+            <div>
+              <h3>Follow each colony’s care</h3>
+              <p class="muted">See recent feeding check-ins, estimated animal numbers and recorded sterilisation updates. These records help your community plan the next visit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shots pair reveal">
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_rounds.jpg" alt="Planning a feeding route" loading="lazy"></div></div><figcaption>Plan a round: start point, distance and stops.</figcaption></figure>
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_colony.jpg" alt="Feeding spot with its recorded history" loading="lazy"></div></div><figcaption>A colony’s recorded feeds, estimated numbers and sterilisation.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Understanding and sharing ─────────────────────────────────────── -->
+<section class="papyrus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Understand and share</span>
+      <h2>Understanding and sharing</h2>
+    </div>
+
+    <div class="tool-split">
+      <div class="tool-list">
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/nav_community_o1.png" alt="">
+            <div>
+              <h3>Two languages, one conversation.</h3>
+              <p class="muted">Read Arabic and English community updates with translations alongside the original. Check important details such as names, amounts and collection times.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/hover_rescued_o.png" alt="">
+            <div>
+              <h3>Turn rescue updates into a story to share</h3>
+              <p class="muted">Create a draft from a report’s recorded timeline. Review the details and the people named before choosing to share it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shots reveal">
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_communities.jpg" alt="Communities list" loading="lazy"></div></div><figcaption>Communities: feeders, rescuers, vets, drivers and butchers near you.</figcaption></figure>
+      </div>
+    </div>
+    <p class="muted shots-note">Screens from the app in English; the Arabic app reads the same.</p>
+  </div>
+</section>
+
+<!-- ── Control and final invitation ──────────────────────────────────── -->
+<section id="your-control" class="nile-bg" style="background:var(--deep)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Assistance with limits</span>
+      <h2>You stay in control</h2>
+      <p class="lead">AI suggestions can be wrong. Check report details, search results and translations before acting on them. You choose what to post and which route to take.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card nile reveal">
+        <h3>Plan your next act of care</h3>
+        <p class="muted">Open Spot a Paw to report an animal, plan a feeding round or connect with your community.</p>
+        <p style="margin:0"><a class="btn btn-orange" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">Open the app</a></p>
+      </div>
+
+      <div class="card nile reveal">
+        <span class="pill">Future plan</span>
+        <h3>Planning for the food trucks</h3>
+        <p class="muted" style="margin:0">Feeding and collection records could help plan future routes and portions for One Tail One Meal’s food trucks. The trucks are a planned phase, not a service running today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/brand_logo_spot_v1.png" alt=""> Spot a Paw</a>
+      <p style="margin-top:.8rem;max-width:40ch">The rescue map for stray animals. The technology arm of <a href="https://onetailonemeal.com" target="_blank" rel="noopener">One Tail One Meal</a>.</p>
+      <p>Sydney · Cairo</p>
+    </div>
+    <div>
+      <h4>App</h4>
+      <ul><li><a href="https://spot-a-paw.com/app/">Web app</a></li><li><a href="ai.html">Smart tools</a></li><li><a href="help.html">Help centre</a></li><li><a href="help.html#account">Account &amp; privacy</a></li><li><a href="help.html#trouble">Troubleshooting</a></li><li><a href="privacy.html">Privacy policy</a></li></ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul><li><a href="mailto:support@spot-a-paw.com">support@spot-a-paw.com</a></li><li><a href="https://onetailonemeal.com" target="_blank" rel="noopener">onetailonemeal.com</a></li></ul>
+    </div>
+    <div class="copy">© 2026 One Tail One Meal · Spot a Paw. See it. Spot it. Save it.</div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=381eac63"></script>
+</body>
+</html>

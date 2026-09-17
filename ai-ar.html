@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إزاي الذكاء الاصطناعي بيساعدك تهتم بحيوانات الشارع | Spot a Paw</title>
+<meta name="description" content="حوّل الصور لمسوّدات بلاغات، ودوّر بكلامك إنت، وخطّط جولات الإطعام من السجلات، واقرا تحديثات المجتمع مترجمة. إنت اللي بتراجع الاقتراحات وتقرر تعمل إيه.">
+<link rel="canonical" href="https://spot-a-paw.com/ai-ar.html">
+<link rel="alternate" hreflang="en" href="https://spot-a-paw.com/ai.html">
+<link rel="alternate" hreflang="ar" href="https://spot-a-paw.com/ai-ar.html">
+<meta property="og:url" content="https://spot-a-paw.com/ai-ar.html">
+<meta property="og:title" content="إزاي الذكاء الاصطناعي بيساعدك تهتم بحيوانات الشارع | Spot a Paw">
+<meta property="og:description" content="مسوّدة بلاغ من صورة، وجولات إطعام من السجلات، وترجمة تحديثات المجتمع جنب الأصل. إنت اللي بتراجع وتقرر.">
+<meta property="og:image" content="https://spot-a-paw.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spot a Paw">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://spot-a-paw.com/assets/og.png">
+
+<link rel="icon" href="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=6c07fc6d">
+<style>
+  body{font-family:'Cairo','Inter',system-ui,sans-serif}
+  h1,h2,h3,.brand,.eyebrow{font-family:'Cairo','Bricolage Grotesque',sans-serif}
+  .eyebrow{letter-spacing:0}
+  .lang-switch{display:inline-flex;gap:.4rem;align-items:center;background:rgba(242,235,221,.12);
+               border:1px solid rgba(242,235,221,.3);border-radius:999px;padding:.3rem .5rem}
+  .lang-switch a{color:var(--ivory);text-decoration:none;font-weight:700;font-size:.86rem;
+                 padding:.28rem .7rem;border-radius:999px;opacity:.75}
+  .lang-switch a.on{background:var(--orange);color:#fff;opacity:1}
+  .tool-row{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start}
+  .tool-row .icon{margin:0;width:34px;height:34px;flex:0 0 34px}
+  .tool-row p:last-child{margin-bottom:0}
+  /* نفس الشريط بتاع النسخة الإنجليزي، بس الخط على اليمين */
+  .note-strip{border-right:3px solid var(--orange);padding:.15rem 1rem .15rem 0;margin:1rem 0 0}
+
+  /* المهام في ناحية، وشاشة التطبيق اللي بتقابلها في الناحية التانية. */
+  .tool-split{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:3rem;align-items:center}
+  .tool-list{display:grid;gap:1.2rem}
+  .tool-split.flip .shots{order:-1}
+  @media (max-width:900px){.tool-split{grid-template-columns:minmax(0,1fr);gap:1.6rem}.tool-split.flip .shots{order:0}}
+
+  /* App screenshots: real captures in the site's phone frame. */
+  .shots{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;margin:0}
+  .shots figure{margin:0;text-align:center;max-width:240px}
+  .shots .phone{width:min(230px,70vw)}
+  .shots.pair{gap:1.2rem}
+  .shots.pair figure{max-width:200px}
+  .shots.pair .phone{width:min(200px,40vw)}
+  .shots .phone .screen img{opacity:1}
+  .shots figcaption{margin-top:.8rem;font-size:.9rem;line-height:1.45;opacity:.85}
+  .shots-note{text-align:center;font-size:.85rem;margin:1.6rem 0 0}
+  .help-hero .lead{color:rgba(242,235,221,.88)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index-ar.html"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/brand_logo_spot_v1.png" alt="Spot a Paw"> Spot a Paw</a>
+    <button class="nav-toggle" aria-label="القائمة" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="index-ar.html#how">إزاي بيشتغل</a>
+      <a href="ai-ar.html">الأدوات الذكية</a>
+      <a href="index-ar.html#community">المجتمع</a>
+      <a href="index-ar.html#mothership">One Tail One Meal</a>
+      <a href="help-ar.html">مركز المساعدة</a>
+      <span class="lang-switch"><a href="ai.html">English</a><a class="on" href="ai-ar.html">العربية</a></span>
+      <a class="btn btn-orange btn-sm" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">افتح التطبيق</a>
+    </div>
+  </div>
+</nav>
+
+<header class="help-hero">
+  <div class="wrap">
+    <span class="eyebrow">الأدوات الذكية</span>
+    <h1>إزاي الذكاء الاصطناعي بيساعدك تهتم <span class="accent">بحيوانات الشارع</span></h1>
+    <p class="lead">حوّل صورك لمسوّدات بلاغات، ولاقي نتايج ممكن تكون هي اللي بتدوّر عليها، واقرا تحديثات المجتمع مترجمة. وسجلات الإطعام كمان بتساعدك تخطّط جولاتك وتتابع رعاية كل مجموعة. إنت اللي بتراجع الاقتراحات وتقرر الخطوة الجاية.</p>
+  </div>
+</header>
+
+<!-- ── البلاغ والتدوير على الحيوانات ─────────────────────────────────── -->
+<section class="papyrus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">ترصد وبلّغ</span>
+      <h2>البلاغ والتدوير على الحيوانات</h2>
+    </div>
+
+    <div class="tool-split">
+      <div class="tool-list">
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/nav_spot_a_paw_o1.png" alt="">
+            <div>
+              <h3>اعمل بلاغ من صورة</h3>
+              <p class="muted">ضيف صورة، والذكاء الاصطناعي بيقترح تفاصيل عن الحيوان واللي باين إنه محتاجه. راجع المسوّدة، وصلّح أي حاجة فاتته، وأكّد المكان قبل ما تنشر.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/hover_filters_o.png" alt="">
+            <div>
+              <h3>اتأكد إذا كان الحيوان اتبلّغ عنه قبل كده</h3>
+              <p class="muted">قبل ما بلاغك يتنشر، التطبيق بيدوّر على حيوان ممكن يكون هو نفسه اتبلّغ عنه قريب منك في آخر تلات أيام. بص على الصورة واختار تساعد في البلاغ ده أو تنشر بلاغك.</p>
+              <h3>دوّر بكلامك إنت</h3>
+              <p class="muted">اوصف الحيوان أو الموقف اللي بتدوّر عليه. البحث ممكن يطلّعلك بلاغات قريبة من قصدك حتى لو الكلام مكتوب بشكل مختلف. بصّ على الصور والتفاصيل عشان تتأكد إنه هو.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shots reveal">
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_report.jpg" alt="استمارة البلاغ" loading="lazy"></div></div><figcaption>استمارة البلاغ: ضيف صورة، وبعدين راجع نوع الحيوان ومحتاج إيه.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── التخطيط والتنسيق ─────────────────────────────────────────────── -->
+<section class="nile-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">خطّط ونسّق</span>
+      <h2>التخطيط والتنسيق</h2>
+    </div>
+
+    <div class="tool-split flip">
+      <div class="tool-list">
+        <div class="card deep reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/act_route_o.png" alt="">
+            <div>
+              <h3>خطّط جولتك حوالين المجموعات اللي إطعامها المسجّل اتأخر</h3>
+              <p class="muted">اختار هتبدأ منين، وتقدر تروح لحد فين، وكام محطة تلحق. الجولات المقترحة بتعتمد على مواعيد الإطعام المسجّلة عشان توضّحلك المجموعات اللي ممكن تكون محتاجة زيارة. راجع المحطات وعدّلها قبل ما تنزل.</p>
+              <p class="note-strip muted">غياب التسجيل مش معناه بالضرورة إن محدش أكّل الحيوانات.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card deep reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/role_butcher_o.png" alt="">
+            <div>
+              <h3>وصّل الأكل المتبرَّع بيه للمطعِمين اللي حواليك</h3>
+              <p class="muted">شوف عروض الأكل، وعنوان الاستلام، والوقت المتاح تستلم فيه. نسّق مع المجتمع عشان الكل يعرف مين في الطريق، وإمتى الأكل اتاستلم.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card deep reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/place_feedspots_o1.png" alt="">
+            <div>
+              <h3>تابع رعاية كل مجموعة</h3>
+              <p class="muted">شوف آخر تسجيلات الإطعام، والعدد التقريبي للحيوانات، وتحديثات التعقيم المسجّلة. السجلات دي بتساعد مجتمعك يخطّط للزيارة الجاية.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shots pair reveal">
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_rounds.jpg" alt="تخطيط جولة إطعام" loading="lazy"></div></div><figcaption>خطّط جولة: نقطة البداية، والمسافة، والمحطات.</figcaption></figure>
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_colony.jpg" alt="نقطة إطعام وسجلها" loading="lazy"></div></div><figcaption>إطعام المجموعة المسجّل، وعددها التقريبي، والتعقيم.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── الفهم والمشاركة ──────────────────────────────────────────────── -->
+<section class="papyrus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">افهم وشارك</span>
+      <h2>الفهم والمشاركة</h2>
+    </div>
+
+    <div class="tool-split">
+      <div class="tool-list">
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/nav_community_o1.png" alt="">
+            <div>
+              <h3>لغتين، وكلام واحد.</h3>
+              <p class="muted">اقرا تحديثات المجتمع بالعربي والإنجليزي، والترجمة جنب الكلام الأصلي. راجع التفاصيل المهمة زي الأسامي والكميات ومواعيد الاستلام.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="tool-row">
+            <img class="icon" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/hover_rescued_o.png" alt="">
+            <div>
+              <h3>حوّل تحديثات الإنقاذ لحكاية تشاركها</h3>
+              <p class="muted">اعمل مسوّدة من الخط الزمني المسجّل للبلاغ. راجع التفاصيل والناس اللي اتذكرت أساميهم قبل ما تقرر تشاركها.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shots reveal">
+        <figure><div class="phone"><div class="notch"></div><div class="screen"><img src="assets/screens/ai_communities.jpg" alt="قائمة المجتمعات" loading="lazy"></div></div><figcaption>المجتمعات: مطعِمين ومنقذين وبياطرة وسواقين وجزارين حواليك.</figcaption></figure>
+      </div>
+    </div>
+    <p class="muted shots-note">الصور من التطبيق بالإنجليزي؛ ونسخة العربي نفس الشكل.</p>
+  </div>
+</section>
+
+<!-- ── القرار في إيدك ───────────────────────────────────────────────── -->
+<section id="your-control" class="nile-bg" style="background:var(--deep)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">مساعدة بحدود</span>
+      <h2>القرار في إيدك</h2>
+      <p class="lead">اقتراحات الذكاء الاصطناعي ممكن تغلط. راجع تفاصيل البلاغ، ونتايج البحث، والترجمات قبل ما تتصرف على أساسها. إنت اللي بتختار تنشر إيه، وتمشي في أنهي جولة.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card nile reveal">
+        <h3>خطّط لمساعدتك الجاية</h3>
+        <p class="muted">افتح Spot a Paw عشان تبلّغ عن حيوان، أو تخطّط جولة إطعام، أو تتواصل مع مجتمعك.</p>
+        <p style="margin:0"><a class="btn btn-orange" href="https://spot-a-paw.com/app/" target="_blank" rel="noopener">افتح التطبيق</a></p>
+      </div>
+
+      <div class="card nile reveal">
+        <span class="pill">خطة مستقبلية</span>
+        <h3>تخطيط عربيات الأكل</h3>
+        <p class="muted" style="margin:0">سجلات الإطعام والاستلام ممكن تساعد بعدين في تخطيط طرق وكميات لعربيات أكل One Tail One Meal. العربيات مرحلة جاية، مش خدمة شغّالة دلوقتي.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index-ar.html"><img src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/brand_logo_spot_v1.png" alt=""> Spot a Paw</a>
+      <p style="margin-top:.8rem;max-width:40ch">خريطة إنقاذ حيوانات الشارع. الذراع التقني لـ <a href="https://onetailonemeal.com" target="_blank" rel="noopener">One Tail One Meal</a>.</p>
+      <p>سيدني · القاهرة</p>
+    </div>
+    <div>
+      <h4>التطبيق</h4>
+      <ul><li><a href="https://spot-a-paw.com/app/">التطبيق على الويب</a></li><li><a href="ai-ar.html">الأدوات الذكية</a></li><li><a href="help-ar.html">مركز المساعدة</a></li><li><a href="help.html#account">الحساب والخصوصية</a></li><li><a href="help.html#trouble">حل المشاكل</a></li><li><a href="privacy.html">سياسة الخصوصية</a></li></ul>
+    </div>
+    <div>
+      <h4>كلّمنا</h4>
+      <ul><li><a href="mailto:support@spot-a-paw.com">support@spot-a-paw.com</a></li><li><a href="https://onetailonemeal.com" target="_blank" rel="noopener">onetailonemeal.com</a></li></ul>
+    </div>
+    <div class="copy">© 2026 One Tail One Meal · Spot a Paw. شوفه. ارصده. أنقذه.</div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=381eac63"></script>
+</body>
+</html>

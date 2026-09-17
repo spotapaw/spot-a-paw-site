@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Spot a Paw — email confirmed</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<!--
+  Where the "confirm your email" link lands.
+
+  Before this page existed the link went to the project's Site URL, which is
+  the web app -- and Supabase's confirmation link arrives carrying a session,
+  so the web app signed the reader in and showed them the map. Confusing on a
+  phone, where they had just been told to go back to the app and sign in.
+
+  This page does not touch the session at all. It says the one thing the
+  reader needs to hear, and points back at the app.
+-->
+<style>
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#043431;color:#F2EBDD;margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box}
+  .card{max-width:420px;text-align:center}
+  .mark{width:96px;height:96px;margin:0 auto 18px}
+  h1{font-size:1.6rem;margin:0 0 10px;color:#FF7900}
+  p{line-height:1.5;margin:0 0 14px;color:#F2EBDDdd}
+  .btn{display:inline-block;margin-top:8px;padding:14px 26px;border-radius:999px;background:#FF7900;color:#1F5148;font-weight:800;text-decoration:none}
+  .muted{font-size:.9rem;color:#F2EBDD99;margin-top:22px}
+  .muted a{color:#FF7900}
+  [dir=rtl]{font-family:"Segoe UI",Tahoma,sans-serif}
+</style>
+</head><body>
+<div class="card" id="card">
+  <img class="mark" alt="" src="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+  <h1 id="h">Your email is confirmed</h1>
+  <!-- No "open the app" button: a deep link relaunches the app and wipes the
+       email and password the reader had already typed. The app is still open
+       behind their mail client; switching back keeps everything. -->
+  <p id="p1">Now switch back to the Spot a Paw app — your email and password are still filled in — and tap <b>Sign In</b>.</p>
+  <p class="muted" id="p2">Don't have the app on this phone? <a href="https://spot-a-paw.com/#get">Get it here</a>.</p>
+</div>
+<script>
+// Arabic readers get Arabic. The app stores its locale as ar/en; the browser
+// tells us the same thing well enough for one screen.
+(function(){
+  var ar = /^ar\b/i.test(navigator.language || '');
+  if (!ar) return;
+  document.documentElement.lang = 'ar'; document.documentElement.dir = 'rtl';
+  document.getElementById('h').textContent = 'تم تأكيد بريدك';
+  document.getElementById('p1').innerHTML = 'ارجع لتطبيق Spot a Paw — الإيميل وكلمة السر لسه مكتوبين — واضغط <b>تسجيل الدخول</b>.';
+  document.getElementById('p2').innerHTML = 'التطبيق مش على الموبايل ده؟ <a href="https://spot-a-paw.com/index-ar.html#get">حمّله من هنا</a>.';
+})();
+</script>
+</body></html>

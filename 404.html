@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Spot a Paw</title>
+<script>
+// GitHub Pages has no rewrites. A link straight into the web app at
+// /app/<page> lands here; send it to /app/ with the page kept, and the app
+// opens on it. Anything else goes to the homepage.
+(function () {
+  var p = location.pathname;
+  if (p.indexOf('/app/') === 0 && p !== '/app/') {
+    location.replace('/app/?to=' + encodeURIComponent(p.slice(4) + location.search) + location.hash);
+  } else {
+    location.replace('/');
+  }
+})();
+</script></head><body></body></html>

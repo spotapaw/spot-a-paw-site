@@ -1,0 +1,39 @@
+# Spot a Paw marketing site + help centre. Static; no build step.
+# Netlify: New site -> Import from Git -> this repo, base directory "website",
+# publish directory "website" (or drag this folder onto Netlify Drop).
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/help"
+  to = "/help.html"
+  status = 200
+
+[[redirects]]
+  from = "/app"
+  to = "https://app.spot-a-paw.com"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Apple fetches this file through its CDN and requires JSON content-type.
+# The file has no extension, so Netlify would otherwise serve octet-stream
+# and iOS would silently refuse to register the associated domain.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+
+[[headers]]
+  for = "/.well-known/assetlinks.json"
+  [headers.values]
+    Content-Type = "application/json"
+
+[[redirects]]
+  from = "/confirmed"
+  to = "/confirmed/index.html"
+  status = 200
