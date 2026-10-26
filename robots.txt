@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /qa/
+Disallow: /r/
+Disallow: /confirmed/
+Disallow: /email/
+Disallow: /reset-password/
+Disallow: /test.html
+
+Sitemap: https://spot-a-paw.com/sitemap.xml
