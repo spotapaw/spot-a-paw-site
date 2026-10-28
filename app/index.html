@@ -15,6 +15,14 @@
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
   -->
   <base href="/app/">
+  <script>
+    // Came from 404.html with the page it asked for: put it back in the
+    // address bar before Flutter reads it.
+    (function () {
+      var q = new URLSearchParams(location.search), to = q.get('to');
+      if (to) history.replaceState(null, '', '/app' + to + location.hash);
+    })();
+  </script>
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
