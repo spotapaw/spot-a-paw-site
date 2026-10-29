@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Spot a Paw in under a minute</title>
+<meta name="description" content="A short video tour of Spot a Paw: the map, spotting a paw, helping, feeding rounds and communities.">
+<link rel="icon" href="https://qyyydmjrrtyauyawheos.supabase.co/storage/v1/object/public/report-media/ea87c808-aa49-4286-829b-e69250be5b84/icons/app_icon_spot_a_paw.png">
+<style>
+  html,body{margin:0;height:100%;background:#1F5148;color:#F2EBDD;font-family:"Segoe UI",Roboto,system-ui,sans-serif}
+  main{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;gap:14px}
+  h1{margin:0;font-size:20px;font-weight:700;text-align:center}
+  video{width:min(100%,420px);max-height:calc(100vh - 110px);aspect-ratio:9/16;border-radius:18px;background:#123b34;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  a{color:#FF7900;font-weight:700;text-decoration:none}
+  body.embed .back{display:none}
+</style>
+</head>
+<body>
+<main>
+  <h1 id="t">Spot a Paw in under a minute</h1>
+  <video id="v" controls playsinline preload="metadata"></video>
+  <a class="back" href="/">spot-a-paw.com</a>
+</main>
+<script>
+  // One video per app language; the app opens ?lang=<code>&embed=1.
+  var T = {
+    en: 'Spot a Paw in under a minute',
+    ar: 'Spot a Paw في أقل من دقيقة',
+    es: 'Spot a Paw en menos de un minuto',
+    hi: 'एक मिनट में Spot a Paw',
+    id: 'Spot a Paw dalam semenit',
+    sw: 'Spot a Paw kwa dakika moja'
+  };
+  var q = new URLSearchParams(location.search);
+  var lang = (q.get('lang') || (navigator.language || 'en')).slice(0, 2).toLowerCase();
+  if (!T[lang]) lang = 'en';
+  if (q.get('embed') === '1') document.body.classList.add('embed');
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('t').textContent = T[lang];
+  document.title = T[lang];
+  var v = document.getElementById('v');
+  v.poster = 'assets/walkthrough/walkthrough-' + lang + '.jpg';
+  v.src = 'assets/walkthrough/walkthrough-' + lang + '.mp4';
+</script>
+</body>
+</html>
